@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HabitatReStoreMobile.Pages.DonorFormPage"
+             xmlns:vm="clr-namespace:HabitatReStoreMobile.ViewModels"
+             Title="Enter Your Information">
+    <ContentPage.BindingContext>
+        <vm:DonorFormViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="First Name" Text="{Binding FirstName}" />
+            <Label Text="{Binding VFName}" StyleClass="Validation"/>
+            <Entry Placeholder="Last Name" Text="{Binding LastName}"/>
+            <Label Text="{Binding VLName}" StyleClass="Validation"/>
+            <Entry Placeholder="Email" Text="{Binding Email}"/>
+            <Label Text="{Binding VEmail}" StyleClass="Validation"/>
+            <Entry Placeholder="Phone" Text="{Binding Phone}"/>
+            <Label Text="{Binding VPhone}" StyleClass="Validation"/>
+            <Button Text="Submit" Command="{Binding SubmitCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HabitatReStoreMobile.Pages.DonationHomePage"
+             xmlns:vm="clr-namespace:HabitatReStoreMobile.ViewModels"
+             Title="Donate">
+    <ContentPage.BindingContext>
+        <vm:DonationHomeViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Donate!"/>
+            <Button x:Name="btnPickupForm" Text="Sign Up for Donation Pickup" Command="{Binding PickupCommand}" />
+            <Button x:Name="btnDonorForm" Text="Enter Your Information" Command="{Binding DonorCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

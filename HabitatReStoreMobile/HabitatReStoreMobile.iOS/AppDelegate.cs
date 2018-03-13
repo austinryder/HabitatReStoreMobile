@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
 
 namespace HabitatReStoreMobile.iOS
 {
@@ -24,6 +25,9 @@ namespace HabitatReStoreMobile.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+
+            DependencyService.Register<IOSToast>();
+            Xamarin.FormsMaps.Init();
 
             return base.FinishedLaunching(app, options);
         }

@@ -13,7 +13,7 @@ namespace HabitatReStoreMobile
         {
             InitializeComponent();
 
-            MainPage = new HabitatReStoreMobile.MainPage();
+            MainPage = new HabitatReStoreMobile.Pages.MainPage();
         }
 
         protected override void OnStart()

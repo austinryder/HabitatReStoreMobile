@@ -6,6 +6,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms;
+using System.Threading.Tasks;
+using System.IO;
+using Android.Content;
 
 namespace HabitatReStoreMobile.Droid
 {
@@ -20,6 +24,9 @@ namespace HabitatReStoreMobile.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            Xamarin.FormsMaps.Init(this, bundle);
+            DependencyService.Register<AndroidToast>();
+
             LoadApplication(new App());
         }
     }

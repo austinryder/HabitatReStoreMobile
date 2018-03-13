@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HabitatReStoreMobile.Pages.VolunteerFormPage"
+             xmlns:vm="clr-namespace:HabitatReStoreMobile.ViewModels"
+             Title="Volunteer Form">
+    <ContentPage.BindingContext>
+        <vm:VolunteerFormViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Entry Placeholder="First Name" Text="{Binding FirstName}" />
+                    <Label Text="{Binding VFName}" StyleClass="Validation"/>
+                <Entry Placeholder="Last Name" Text="{Binding LastName}"/>
+                    <Label Text="{Binding VLName}" StyleClass="Validation"/>
+                <Label Text="Gender:" StyleClass="PickerLabel"/>
+                <Picker ItemsSource="{Binding GenderOptions}" SelectedItem="{Binding Gender}"/>
+                <!--DOB Picker-->
+                <Label Text="Date of Birth:" StyleClass="PickerLabel"/>
+                <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding DOB}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+                <Entry Placeholder="SSN" Text="{Binding SSN}"/>
+                    <Label Text="{Binding VSSN}" StyleClass="Validation"/>
+                <Entry Placeholder="City" Text="{Binding City}"/>
+                    <Label Text="{Binding VCity}" StyleClass="Validation"/>
+                <Label Text="State:" StyleClass="PickerLabel"/>
+                <Picker ItemsSource="{Binding StateOptions}" SelectedItem="{Binding State}"/>
+                <Entry Placeholder="Address" Text="{Binding VAddress}"/>
+                    <Label Text="{Binding VAddress}" StyleClass="Validation"/>
+                <Entry Placeholder="Address2" Text="{Binding VAddress2}"/>
+                    <Label Text="{Binding VAddress2}" StyleClass="Validation"/>
+                <Entry Placeholder="Email" Text="{Binding Email}"/>
+                    <Label Text="{Binding VEmail}" StyleClass="Validation"/>
+                <Entry Placeholder="Phone" Text="{Binding Phone}"/>
+                    <Label Text="{Binding VPhone}" StyleClass="Validation"/>
+                <Label Text="Preferred Method of Contact:" StyleClass="PickerLabel"/>
+                <Picker ItemsSource="{Binding ContactOptions}" SelectedItem="{Binding Contact}"/>
+                <Label Text="Preferred Role:" StyleClass="PickerLabel"/>
+                <Picker ItemsSource="{Binding VolunteerRoleOptions}" SelectedItem="{Binding Role}"/>
+                <Button Text="Submit" Command="{Binding ResultCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
