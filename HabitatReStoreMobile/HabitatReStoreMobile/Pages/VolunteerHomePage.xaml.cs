@@ -1,5 +1,4 @@
-﻿using HabitatReStoreMobile.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +15,11 @@ namespace HabitatReStoreMobile.Pages
         public VolunteerHomePage()
         {
             InitializeComponent();
+        }
 
-            var vm = new VolunteerHomeViewModel();
-            vm.Navigation = Navigation;
-            BindingContext = vm;
+        private void btnGoSignUp_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new VolunteerFormPage());
         }
     }
 }

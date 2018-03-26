@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HabitatReStoreMobile"
              x:Class="HabitatReStoreMobile.Pages.MainPage"
-             xmlns:vm="clr-namespace:HabitatReStoreMobile.ViewModels"
              Title="masterpage">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu" NavigationPage.HasNavigationBar="True">
             <StackLayout Orientation="Vertical">
 
-                <!-- Menu bar title design -->
+                <!-- Navigation Header -->
                 <StackLayout Orientation="Horizontal" BackgroundColor="#51B948" HeightRequest="100">
                     <Image Source="imgLogo.png"
                            HorizontalOptions="Center"
@@ -31,7 +30,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <!-- Menu item design -->
+                                <!-- Navigation Item -->
                                 <StackLayout VerticalOptions="FillAndExpand"
                                          Orientation="Horizontal"
                                          Padding="20,0,0,10"

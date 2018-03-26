@@ -2,22 +2,45 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HabitatReStoreMobile.Pages.DonorFormPage"
-             xmlns:vm="clr-namespace:HabitatReStoreMobile.ViewModels"
-             Title="Enter Your Information">
-    <ContentPage.BindingContext>
-        <vm:DonorFormViewModel/>
-    </ContentPage.BindingContext>
+             Title="Donor Form">
     <ContentPage.Content>
-        <StackLayout>
-            <Entry Placeholder="First Name" Text="{Binding FirstName}" />
-            <Label Text="{Binding VFName}" StyleClass="Validation"/>
-            <Entry Placeholder="Last Name" Text="{Binding LastName}"/>
-            <Label Text="{Binding VLName}" StyleClass="Validation"/>
-            <Entry Placeholder="Email" Text="{Binding Email}"/>
-            <Label Text="{Binding VEmail}" StyleClass="Validation"/>
-            <Entry Placeholder="Phone" Text="{Binding Phone}"/>
-            <Label Text="{Binding VPhone}" StyleClass="Validation"/>
-            <Button Text="Submit" Command="{Binding SubmitCommand}" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Entry x:Name="entFName" Placeholder="First Name" />
+                <Label x:Name="lblVFName" StyleClass="Validation"/>
+                <Entry x:Name="entMName" Placeholder="Middle Name"/>
+                <Entry x:Name="entLName" Placeholder="Last Name"/>
+                <Label x:Name="lblVLName" StyleClass="Validation"/>
+                <!--Gender Picker-->
+                <Label Text="Gender:" StyleClass="PickerLabel"/>
+                <Picker x:Name="pickGender"/>
+                <!--DOB Picker-->
+                <Label Text="Date of Birth:" StyleClass="PickerLabel"/>
+                <DatePicker x:Name="pickDOB" VerticalOptions="CenterAndExpand">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+                <!-- DOB VALIDATION PROBABLY UNECCESSARY HERE
+                    Label x:Name="lblVDOB" StyleClass="Validation"/-->
+                <Entry x:Name="entAddress" Placeholder="Address" />
+                <Label x:Name="lblVAddress" StyleClass="Validation"/>
+                <Entry x:Name="entAddress2" Placeholder="Address2"/>
+                <Label x:Name="lblVAddress2" StyleClass="Validation"/>
+                <Entry x:Name="entCity" Placeholder="City"/>
+                <Label x:Name="lblVCity" StyleClass="Validation"/>
+                <!--State Picker-->
+                <Label Text="State:" StyleClass="PickerLabel"/>
+                <Picker x:Name="pickState"/>
+                <Entry x:Name="entZIP" Placeholder="ZIP Code"/>
+                <Label x:Name="lblVZIP" StyleClass="Validation"/>
+                <Entry x:Name="entEmail" Placeholder="Email"/>
+                <Label x:Name="lblVEmail" StyleClass="Validation"/>
+                <Entry x:Name="entPhone" Placeholder="Phone"/>
+                <Label x:Name="lblVPhone" StyleClass="Validation"/>
+                <!--Contact Method Picker-->
+                <Label Text="Preferred Method of Contact:" StyleClass="PickerLabel"/>
+                <Picker x:Name="pickContactMethod"/>
+                <Button x:Name="btnSubmit" Text="Submit" Clicked="btnSubmit_Clicked" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

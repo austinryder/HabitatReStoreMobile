@@ -2,14 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HabitatReStoreMobile.Pages.VolunteerHomePage"
-             xmlns:vm="clr-namespace:HabitatReStoreMobile.ViewModels"
              Title="Volunteer">
-    <ContentPage.BindingContext>
-        <vm:VolunteerHomeViewModel/>
-    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Go to Volunteer Sign Up" Command="{Binding SignUpCommand}" />
+            <Button x:Name="btnGoSignUp" Text="Go to Volunteer Sign Up" Clicked="btnGoSignUp_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

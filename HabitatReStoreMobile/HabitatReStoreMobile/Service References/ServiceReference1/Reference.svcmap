@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0a8c5498-6d32-4c9a-ad53-7cafd8660ae6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.1.5/HabitatWCFService/HabitatService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="HabitatService.disco" MetadataType="Disco" ID="65c7c1a5-2389-4238-b263-c12a053259f6" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?disco" />
+    <MetadataFile FileName="HabitatService.xsd" MetadataType="Schema" ID="852bf196-bae3-417f-a3e1-923f7e3eb10a" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd1" />
+    <MetadataFile FileName="HabitatService.wsdl" MetadataType="Wsdl" ID="1566b298-a232-4bc5-bd18-4bb0a0f8df9d" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?wsdl" />
+    <MetadataFile FileName="HabitatService1.xsd" MetadataType="Schema" ID="77a14fdd-893d-406e-8cea-6d34ed161be8" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd2" />
+    <MetadataFile FileName="HabitatService2.xsd" MetadataType="Schema" ID="655d931d-0994-4aac-b310-842915ccc85d" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

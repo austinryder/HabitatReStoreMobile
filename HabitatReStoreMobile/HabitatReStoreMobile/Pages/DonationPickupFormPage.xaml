@@ -2,16 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HabitatReStoreMobile.Pages.DonationPickupFormPage"
-             xmlns:vm="clr-namespace:HabitatReStoreMobile.ViewModels"
              Title="Donation Pickup Form">
-    <ContentPage.BindingContext>
-        <vm:DonationPickupFormViewModel/>
-    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Image x:Name="imgDonationPhoto" HorizontalOptions="Center" WidthRequest="320" HeightRequest="240"/>
-            <Button x:Name="btnAddPhoto" Text="Add Picture" Command="{Binding AddPictureCommand}"/>
-            <Button Text="Submit" Command="{Binding SubmitCommand}" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Frame OutlineColor="#005596" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="20" Margin="20,10,20,0">
+                    <Image x:Name="imgDonationPhoto" Source="noimage.png" HorizontalOptions="Center" WidthRequest="340" HeightRequest="180" Margin="0, 0, 0, 0"/>
+                </Frame>
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="btnTakePhoto" Text="Take Photo" Margin="20, 5, 0, 10" FontSize="16" Clicked="btnTakePhoto_Clicked"/>
+                    <Button x:Name="btnSelectPhoto" Text="Select from Gallery" Margin="0, 5, 20, 10"  FontSize="16" Clicked="btnSelectPhoto_Clicked"/>
+                </StackLayout>
+                
+                <Button x:Name="btnSubmit" Text="Submit" Clicked="btnSubmit_Clicked" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

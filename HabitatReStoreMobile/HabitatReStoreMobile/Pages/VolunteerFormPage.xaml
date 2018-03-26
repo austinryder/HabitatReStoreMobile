@@ -2,44 +2,48 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HabitatReStoreMobile.Pages.VolunteerFormPage"
-             xmlns:vm="clr-namespace:HabitatReStoreMobile.ViewModels"
              Title="Volunteer Form">
-    <ContentPage.BindingContext>
-        <vm:VolunteerFormViewModel/>
-    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Entry Placeholder="First Name" Text="{Binding FirstName}" />
-                    <Label Text="{Binding VFName}" StyleClass="Validation"/>
-                <Entry Placeholder="Last Name" Text="{Binding LastName}"/>
-                    <Label Text="{Binding VLName}" StyleClass="Validation"/>
+                <Entry x:Name="entFName" Placeholder="First Name" />
+                    <Label x:Name="lblVFName" StyleClass="Validation"/>
+                <Entry x:Name="entMName" Placeholder="Middle Name"/>
+                <Entry x:Name="entLName" Placeholder="Last Name"/>
+                <Label x:Name="lblVLName" StyleClass="Validation"/>
+                <!--Gender Picker-->
                 <Label Text="Gender:" StyleClass="PickerLabel"/>
-                <Picker ItemsSource="{Binding GenderOptions}" SelectedItem="{Binding Gender}"/>
+                <Picker x:Name="pickGender"/>
                 <!--DOB Picker-->
                 <Label Text="Date of Birth:" StyleClass="PickerLabel"/>
-                <DatePicker VerticalOptions="CenterAndExpand" Date="{Binding DOB}">
+                <DatePicker x:Name="pickDOB" VerticalOptions="CenterAndExpand">
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
                 </DatePicker>
-                <Entry Placeholder="SSN" Text="{Binding SSN}"/>
-                    <Label Text="{Binding VSSN}" StyleClass="Validation"/>
-                <Entry Placeholder="City" Text="{Binding City}"/>
-                    <Label Text="{Binding VCity}" StyleClass="Validation"/>
+                    <Label x:Name="lblVDOB" StyleClass="Validation"/>
+                <Entry x:Name="entSSN" Placeholder="SSN"/>
+                    <Label x:Name="lblVSSN" StyleClass="Validation"/>
+                <Entry x:Name="entAddress" Placeholder="Address" />
+                    <Label x:Name="lblVAddress" StyleClass="Validation"/>
+                <Entry x:Name="entAddress2" Placeholder="Address2"/>
+                    <Label x:Name="lblVAddress2" StyleClass="Validation"/>
+                <Entry x:Name="entCity" Placeholder="City"/>
+                    <Label x:Name="lblVCity" StyleClass="Validation"/>
+                <!--State Picker-->
                 <Label Text="State:" StyleClass="PickerLabel"/>
-                <Picker ItemsSource="{Binding StateOptions}" SelectedItem="{Binding State}"/>
-                <Entry Placeholder="Address" Text="{Binding VAddress}"/>
-                    <Label Text="{Binding VAddress}" StyleClass="Validation"/>
-                <Entry Placeholder="Address2" Text="{Binding VAddress2}"/>
-                    <Label Text="{Binding VAddress2}" StyleClass="Validation"/>
-                <Entry Placeholder="Email" Text="{Binding Email}"/>
-                    <Label Text="{Binding VEmail}" StyleClass="Validation"/>
-                <Entry Placeholder="Phone" Text="{Binding Phone}"/>
-                    <Label Text="{Binding VPhone}" StyleClass="Validation"/>
+                <Picker x:Name="pickState"/>
+                <Entry x:Name="entZIP" Placeholder="ZIP Code"/>
+                <Label x:Name="lblVZIP" StyleClass="Validation"/>
+                <Entry x:Name="entEmail" Placeholder="Email"/>
+                    <Label x:Name="lblVEmail" StyleClass="Validation"/>
+                <Entry x:Name="entPhone" Placeholder="Phone"/>
+                    <Label x:Name="lblVPhone" StyleClass="Validation"/>
+                <!--Contact Method Picker-->
                 <Label Text="Preferred Method of Contact:" StyleClass="PickerLabel"/>
-                <Picker ItemsSource="{Binding ContactOptions}" SelectedItem="{Binding Contact}"/>
+                <Picker x:Name="pickContactMethod"/>
+                <!--Role Picker-->
                 <Label Text="Preferred Role:" StyleClass="PickerLabel"/>
-                <Picker ItemsSource="{Binding VolunteerRoleOptions}" SelectedItem="{Binding Role}"/>
-                <Button Text="Submit" Command="{Binding ResultCommand}" />
+                <Picker x:Name="pickRole"/>
+                <Button x:Name="btnSubmit" Text="Submit" Clicked="btnSubmit_Clicked" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

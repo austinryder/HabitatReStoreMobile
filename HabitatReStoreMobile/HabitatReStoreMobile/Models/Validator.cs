@@ -56,5 +56,18 @@ namespace HabitatReStoreMobile.Models
 
             return match.Success;
         }
+
+        public static bool ZIPCheck(string value)
+        {
+            if (value == null)
+            {
+                return false;
+            }
+
+            Regex regex = new Regex(@"^\d{5}(?:[-\s]\d{4})?$");
+            Match match = regex.Match(value);
+
+            return match.Success;
+        }
     }
 }

@@ -15,12 +15,12 @@ namespace HabitatReStoreMobile.Pages
             InitializeComponent();
 
             //initialize navigation menu
-            var menuList = new List<MasterPageNavItem>();
+            var menuList = new List<NavigationItem>();
 
-            var pageHome = new MasterPageNavItem() { Title = "Home", Icon = "icHome.png", TargetType = typeof(HomePage) };
-            var pageFindReStore = new MasterPageNavItem() { Title = "Find a ReStore", Icon = "icFind.png", TargetType = typeof(FindReStorePage) };
-            var pageDonationHome = new MasterPageNavItem() { Title = "Donate", Icon = "icDonate.png", TargetType = typeof(DonationHomePage) };
-            var pageVolunteerHome = new MasterPageNavItem() { Title = "Volunteer", Icon = "icVolunteer.png", TargetType = typeof(VolunteerHomePage) };
+            var pageHome = new NavigationItem() { Title = "Home", Icon = "icHome.png", Page = typeof(HomePage) };
+            var pageFindReStore = new NavigationItem() { Title = "Find a ReStore", Icon = "icFind.png", Page = typeof(FindReStorePage) };
+            var pageDonationHome = new NavigationItem() { Title = "Donate", Icon = "icDonate.png", Page = typeof(DonationHomePage) };
+            var pageVolunteerHome = new NavigationItem() { Title = "Volunteer", Icon = "icVolunteer.png", Page = typeof(VolunteerHomePage) };
 
             menuList.Add(pageHome);
             menuList.Add(pageFindReStore);
@@ -36,9 +36,9 @@ namespace HabitatReStoreMobile.Pages
 
         private void OnMenuItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = (MasterPageNavItem)e.SelectedItem;
+            var item = (NavigationItem)e.SelectedItem;
             var title = item.Title;
-            Type page = item.TargetType;
+            Type page = item.Page;
 
             var newpage = (Page)Activator.CreateInstance(page);
             newpage.Title = item.Title;

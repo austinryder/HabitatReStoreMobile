@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 
 using Xamarin.Forms;
@@ -9,6 +10,7 @@ namespace HabitatReStoreMobile
 {
     public partial class App : Application
     {
+        public static EndpointAddress SERVICEADDRESS = new EndpointAddress("http://7440753d.ngrok.io/HabitatWCFService/HabitatService.svc");
         public App()
         {
             InitializeComponent();

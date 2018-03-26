@@ -1,5 +1,4 @@
-﻿using HabitatReStoreMobile.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +15,16 @@ namespace HabitatReStoreMobile.Pages
         public DonationHomePage()
         {
             InitializeComponent();
+        }
 
-            var vm = new DonationHomeViewModel();
-            vm.Navigation = Navigation;
-            BindingContext = vm;
+        private void btnGoPickupForm_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new DonationPickupFormPage());
+        }
+
+        private void btnGoDonorForm_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new DonorFormPage());
         }
     }
 }
