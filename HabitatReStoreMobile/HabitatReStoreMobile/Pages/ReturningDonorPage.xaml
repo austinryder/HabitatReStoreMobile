@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HabitatReStoreMobile.Pages.ReturningDonorPage"
+             Title="Return Donor">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Entry x:Name="entEmail" Placeholder="Enter your Email Address" />
+                <Label x:Name="lblVEmail" StyleClass="Validation"/>
+                <Button x:Name="btnSubmit" Text="Submit" Clicked="btnSubmit_Clicked" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -18,27 +18,30 @@ namespace HabitatReStoreMobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DonorFormPage : ContentPage
     {
-        HabitatServiceClient service;
+        DonorInfo newDonor;
 
         public DonorFormPage()
         {
             InitializeComponent();
 
             InitializePickers();
+
+            if (App.service.State == null)
+            {
+                App.InitializeService();
+            }
         }
 
         private void btnSubmit_Clicked(object sender, EventArgs e)
         {
-            DonorInfo newDonor = GetDonor();
+            newDonor = GetDonor();
 
             if (ValidateAll(newDonor))
             {
-                InitializeService();
-                InsertToDatabase(newDonor);
+                btnSubmit.IsEnabled = false;
+                DependencyService.Get<IToast>().ShortAlert("Submitting... please wait.");
 
-                OnPropertyChanged("SubmitCommand");
-
-                Navigation.PushAsync(new DonationPickupFormPage());
+                InsertDonorToDatabase(newDonor);
             }
         }
 
@@ -47,14 +50,13 @@ namespace HabitatReStoreMobile.Pages
             string fName, lName, mName, email, phone, city, zip, address, address2;
             string state;
             char gender;
-            DateTime dob;
 
             fName = entFName.Text;
             lName = entLName.Text;
             mName = entMName.Text;
             email = entEmail.Text;
-            //strip non-numeric characters
-            phone = Regex.Replace(entPhone.Text, "[^0-9]", "");
+            //strip non-numeric characters, if null return empty space
+            phone = Regex.Replace(entPhone.Text ?? "", "[^0-9]", "");
             city = entCity.Text;
             zip = entZIP.Text;
             address = entAddress.Text;
@@ -62,15 +64,12 @@ namespace HabitatReStoreMobile.Pages
             gender = pickGender.SelectedItem.ToString()[0];
             state = pickState.SelectedItem.ToString();
 
-            dob = pickDOB.Date;
-
             DonorInfo newDonor = new DonorInfo();
             newDonor.Status_Map_ID = 1;
             newDonor.First_Name = fName;
             newDonor.Middle_Name = mName;
             newDonor.Last_Name = lName;
             newDonor.Gender = gender;
-            newDonor.DOB = dob;
             newDonor.Email = email;
             newDonor.Phone = phone;
             newDonor.ZipCode = zip;
@@ -82,55 +81,63 @@ namespace HabitatReStoreMobile.Pages
             return newDonor;
         }
 
-        private void InitializeService()
-        {
-            BasicHttpBinding binding = new BasicHttpBinding
-            {
-                Name = "basicHttpBinding",
-                MaxBufferSize = 2147483647,
-                MaxReceivedMessageSize = 2147483647
-            };
-            TimeSpan timeout = new TimeSpan(0, 0, 30);
-            binding.SendTimeout = timeout;
-            binding.OpenTimeout = timeout;
-            binding.ReceiveTimeout = timeout;
-
-            service = new HabitatServiceClient(binding, App.SERVICEADDRESS);
-        }
-
-        private async void InsertToDatabase(DonorInfo donor)
+        private async void InsertDonorToDatabase(DonorInfo donor)
         {
             try
             {
-                service.InsertDonorCompleted += new EventHandler<InsertDonorCompletedEventArgs>(Service_InsertVolunteerCompleted);
-                service.InsertDonorAsync(donor);
+                App.service.InsertDonorCompleted += new EventHandler<InsertDonorCompletedEventArgs>(Service_InsertDonorCompleted);
+                App.service.InsertDonorAsync(donor);
             }
             catch (Exception ex)
             {
+                DependencyService.Get<IToast>().LongAlert("Error, unable to access server.");
+                btnSubmit.IsEnabled = true;
                 Debug.WriteLine(ex);
             }
         }
 
-        private void Service_InsertVolunteerCompleted(object sender, InsertDonorCompletedEventArgs e)
+        private void Service_InsertDonorCompleted(object sender, InsertDonorCompletedEventArgs e)
         {
-            try
+            bool success = false;
+            string message = "";
+
+            if (e.Error == null)
             {
                 int result = e.Result;
                 if (result == 1)
                 {
-                    Device.BeginInvokeOnMainThread(() => DependencyService.Get<IToast>().LongAlert("Donor form successfully submitted."));
-                    Device.BeginInvokeOnMainThread(() => Navigation.PopToRootAsync());
+                    success = true;
+                    message = "Donor form successfully submitted";
                 }
                 else
                 {
-                    Device.BeginInvokeOnMainThread(() => DependencyService.Get<IToast>().LongAlert("Error submitting donor form."));
+                    success = false;
+                    message = "Error submitting donor form.";
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Device.BeginInvokeOnMainThread(() => DependencyService.Get<IToast>().LongAlert("Error submitting donor form."));
-                Debug.WriteLine(ex.InnerException);
+                success = false;
+                message = "Error submitting donor form.";
+                Debug.WriteLine(e.Error);
             }
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                OnCompleted(success, message);
+            });
+        }
+
+        private void OnCompleted(bool success, string message)
+        {
+            DependencyService.Get<IToast>().LongAlert(message);
+
+            if (success)
+            {
+                Navigation.PushAsync(new DonationPickupFormPage(newDonor));
+            }
+
+            btnSubmit.IsEnabled = true;
         }
 
         private bool ValidateAll(DonorInfo newDonor)
@@ -206,8 +213,6 @@ namespace HabitatReStoreMobile.Pages
             pickGender.SelectedIndex = 0;
             pickState.SelectedItem = "NC";
             pickContactMethod.SelectedIndex = 0;
-
-            pickDOB.Date = DateTime.Today;
         }
     }
 }

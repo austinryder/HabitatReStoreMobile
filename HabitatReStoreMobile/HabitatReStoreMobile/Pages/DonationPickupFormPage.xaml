@@ -13,7 +13,25 @@
                     <Button x:Name="btnTakePhoto" Text="Take Photo" Margin="20, 5, 0, 10" FontSize="16" Clicked="btnTakePhoto_Clicked"/>
                     <Button x:Name="btnSelectPhoto" Text="Select from Gallery" Margin="0, 5, 20, 10"  FontSize="16" Clicked="btnSelectPhoto_Clicked"/>
                 </StackLayout>
-                
+                <!--Item Category Picker-->
+                <Label Text="Select Item Category:" StyleClass="PickerLabel"/>
+                <Picker x:Name="pickItemCategory"/>
+                <!--Switch to use Donor Address-->
+                <StackLayout Orientation="Horizontal">
+                    <Switch x:Name="swUseDonorAddress" Toggled="swUseDonorAddress_Toggled" IsToggled="False" Margin="0, 20, 0, 0"/>
+                    <Label Text="Use same address as donor?" StyleClass="PickerLabel"/>
+                </StackLayout>
+                <Entry x:Name="entAddress" Placeholder="Address" />
+                <Label x:Name="lblVAddress" StyleClass="Validation"/>
+                <Entry x:Name="entAddress2" Placeholder="Address2"/>
+                <Label x:Name="lblVAddress2" StyleClass="Validation"/>
+                <Entry x:Name="entCity" Placeholder="City"/>
+                <Label x:Name="lblVCity" StyleClass="Validation"/>
+                <!--State Picker-->
+                <Label Text="State:" StyleClass="PickerLabel"/>
+                <Picker x:Name="pickState"/>
+                <Entry x:Name="entZIP" Placeholder="ZIP Code"/>
+                <Label x:Name="lblVZIP" StyleClass="Validation"/>
                 <Button x:Name="btnSubmit" Text="Submit" Clicked="btnSubmit_Clicked" />
             </StackLayout>
         </ScrollView>

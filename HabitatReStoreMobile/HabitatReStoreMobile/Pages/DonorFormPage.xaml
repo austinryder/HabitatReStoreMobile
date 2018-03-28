@@ -14,13 +14,6 @@
                 <!--Gender Picker-->
                 <Label Text="Gender:" StyleClass="PickerLabel"/>
                 <Picker x:Name="pickGender"/>
-                <!--DOB Picker-->
-                <Label Text="Date of Birth:" StyleClass="PickerLabel"/>
-                <DatePicker x:Name="pickDOB" VerticalOptions="CenterAndExpand">
-                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
-                </DatePicker>
-                <!-- DOB VALIDATION PROBABLY UNECCESSARY HERE
-                    Label x:Name="lblVDOB" StyleClass="Validation"/-->
                 <Entry x:Name="entAddress" Placeholder="Address" />
                 <Label x:Name="lblVAddress" StyleClass="Validation"/>
                 <Entry x:Name="entAddress2" Placeholder="Address2"/>

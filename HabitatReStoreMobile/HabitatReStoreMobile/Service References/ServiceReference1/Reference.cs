@@ -43,6 +43,8 @@ namespace HabitatReStoreMobile.ServiceReference1 {
         
         private int Status_Map_IDField;
         
+        private int Volunteer_IDField;
+        
         private string ZipCodeField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -215,6 +217,19 @@ namespace HabitatReStoreMobile.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Volunteer_ID {
+            get {
+                return this.Volunteer_IDField;
+            }
+            set {
+                if ((this.Volunteer_IDField.Equals(value) != true)) {
+                    this.Volunteer_IDField = value;
+                    this.RaisePropertyChanged("Volunteer_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string ZipCode {
             get {
                 return this.ZipCodeField;
@@ -248,7 +263,7 @@ namespace HabitatReStoreMobile.ServiceReference1 {
         
         private string CityField;
         
-        private System.DateTime DOBField;
+        private int Donor_IDField;
         
         private string EmailField;
         
@@ -308,14 +323,14 @@ namespace HabitatReStoreMobile.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime DOB {
+        public int Donor_ID {
             get {
-                return this.DOBField;
+                return this.Donor_IDField;
             }
             set {
-                if ((this.DOBField.Equals(value) != true)) {
-                    this.DOBField = value;
-                    this.RaisePropertyChanged("DOB");
+                if ((this.Donor_IDField.Equals(value) != true)) {
+                    this.Donor_IDField = value;
+                    this.RaisePropertyChanged("Donor_ID");
                 }
             }
         }
@@ -447,6 +462,276 @@ namespace HabitatReStoreMobile.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DonationInfo", Namespace="http://schemas.datacontract.org/2004/07/HabitatWCFService")]
+    public partial class DonationInfo : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string AddressField;
+        
+        private string Address2Field;
+        
+        private bool Bypass_FlagField;
+        
+        private string CityField;
+        
+        private int Donor_IDField;
+        
+        private string StateField;
+        
+        private int Status_Map_IDField;
+        
+        private int Store_IDField;
+        
+        private string ZipCodeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address2 {
+            get {
+                return this.Address2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Address2Field, value) != true)) {
+                    this.Address2Field = value;
+                    this.RaisePropertyChanged("Address2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Bypass_Flag {
+            get {
+                return this.Bypass_FlagField;
+            }
+            set {
+                if ((this.Bypass_FlagField.Equals(value) != true)) {
+                    this.Bypass_FlagField = value;
+                    this.RaisePropertyChanged("Bypass_Flag");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string City {
+            get {
+                return this.CityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityField, value) != true)) {
+                    this.CityField = value;
+                    this.RaisePropertyChanged("City");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Donor_ID {
+            get {
+                return this.Donor_IDField;
+            }
+            set {
+                if ((this.Donor_IDField.Equals(value) != true)) {
+                    this.Donor_IDField = value;
+                    this.RaisePropertyChanged("Donor_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string State {
+            get {
+                return this.StateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StateField, value) != true)) {
+                    this.StateField = value;
+                    this.RaisePropertyChanged("State");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Status_Map_ID {
+            get {
+                return this.Status_Map_IDField;
+            }
+            set {
+                if ((this.Status_Map_IDField.Equals(value) != true)) {
+                    this.Status_Map_IDField = value;
+                    this.RaisePropertyChanged("Status_Map_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Store_ID {
+            get {
+                return this.Store_IDField;
+            }
+            set {
+                if ((this.Store_IDField.Equals(value) != true)) {
+                    this.Store_IDField = value;
+                    this.RaisePropertyChanged("Store_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ZipCode {
+            get {
+                return this.ZipCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ZipCodeField, value) != true)) {
+                    this.ZipCodeField = value;
+                    this.RaisePropertyChanged("ZipCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ItemInfo", Namespace="http://schemas.datacontract.org/2004/07/HabitatWCFService")]
+    public partial class ItemInfo : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int Donation_IDField;
+        
+        private byte[] Donation_ImageField;
+        
+        private int Item_Category_IDField;
+        
+        private int Item_IDField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Donation_ID {
+            get {
+                return this.Donation_IDField;
+            }
+            set {
+                if ((this.Donation_IDField.Equals(value) != true)) {
+                    this.Donation_IDField = value;
+                    this.RaisePropertyChanged("Donation_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Donation_Image {
+            get {
+                return this.Donation_ImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Donation_ImageField, value) != true)) {
+                    this.Donation_ImageField = value;
+                    this.RaisePropertyChanged("Donation_Image");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Item_Category_ID {
+            get {
+                return this.Item_Category_IDField;
+            }
+            set {
+                if ((this.Item_Category_IDField.Equals(value) != true)) {
+                    this.Item_Category_IDField = value;
+                    this.RaisePropertyChanged("Item_Category_ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Item_ID {
+            get {
+                return this.Item_IDField;
+            }
+            set {
+                if ((this.Item_IDField.Equals(value) != true)) {
+                    this.Item_IDField = value;
+                    this.RaisePropertyChanged("Item_ID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ItemCategory", Namespace="http://schemas.datacontract.org/2004/07/HabitatWCFService")]
+    public partial class ItemCategory : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string DescriptionField;
+        
+        private int Item_Category_IDField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Item_Category_ID {
+            get {
+                return this.Item_Category_IDField;
+            }
+            set {
+                if ((this.Item_Category_IDField.Equals(value) != true)) {
+                    this.Item_Category_IDField = value;
+                    this.RaisePropertyChanged("Item_Category_ID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IHabitatService")]
     public interface IHabitatService {
@@ -460,6 +745,21 @@ namespace HabitatReStoreMobile.ServiceReference1 {
         System.IAsyncResult BeginInsertDonor(HabitatReStoreMobile.ServiceReference1.DonorInfo donorInfo, System.AsyncCallback callback, object asyncState);
         
         int EndInsertDonor(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IHabitatService/InsertDonation", ReplyAction="http://tempuri.org/IHabitatService/InsertDonationResponse")]
+        System.IAsyncResult BeginInsertDonation(HabitatReStoreMobile.ServiceReference1.DonationInfo donationInfo, HabitatReStoreMobile.ServiceReference1.ItemInfo itemInfo, System.AsyncCallback callback, object asyncState);
+        
+        int EndInsertDonation(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IHabitatService/GetDonorFromEmail", ReplyAction="http://tempuri.org/IHabitatService/GetDonorFromEmailResponse")]
+        System.IAsyncResult BeginGetDonorFromEmail(string email, System.AsyncCallback callback, object asyncState);
+        
+        HabitatReStoreMobile.ServiceReference1.DonorInfo EndGetDonorFromEmail(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IHabitatService/GetItemCategories", ReplyAction="http://tempuri.org/IHabitatService/GetItemCategoriesResponse")]
+        System.IAsyncResult BeginGetItemCategories(System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<HabitatReStoreMobile.ServiceReference1.ItemCategory> EndGetItemCategories(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -506,6 +806,63 @@ namespace HabitatReStoreMobile.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class InsertDonationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public InsertDonationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public int Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetDonorFromEmailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetDonorFromEmailCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public HabitatReStoreMobile.ServiceReference1.DonorInfo Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((HabitatReStoreMobile.ServiceReference1.DonorInfo)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetItemCategoriesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetItemCategoriesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<HabitatReStoreMobile.ServiceReference1.ItemCategory> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<HabitatReStoreMobile.ServiceReference1.ItemCategory>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class HabitatServiceClient : System.ServiceModel.ClientBase<HabitatReStoreMobile.ServiceReference1.IHabitatService>, HabitatReStoreMobile.ServiceReference1.IHabitatService {
         
         private BeginOperationDelegate onBeginInsertVolunteerDelegate;
@@ -519,6 +876,24 @@ namespace HabitatReStoreMobile.ServiceReference1 {
         private EndOperationDelegate onEndInsertDonorDelegate;
         
         private System.Threading.SendOrPostCallback onInsertDonorCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginInsertDonationDelegate;
+        
+        private EndOperationDelegate onEndInsertDonationDelegate;
+        
+        private System.Threading.SendOrPostCallback onInsertDonationCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetDonorFromEmailDelegate;
+        
+        private EndOperationDelegate onEndGetDonorFromEmailDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetDonorFromEmailCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetItemCategoriesDelegate;
+        
+        private EndOperationDelegate onEndGetItemCategoriesDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetItemCategoriesCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -577,6 +952,12 @@ namespace HabitatReStoreMobile.ServiceReference1 {
         public event System.EventHandler<InsertVolunteerCompletedEventArgs> InsertVolunteerCompleted;
         
         public event System.EventHandler<InsertDonorCompletedEventArgs> InsertDonorCompleted;
+        
+        public event System.EventHandler<InsertDonationCompletedEventArgs> InsertDonationCompleted;
+        
+        public event System.EventHandler<GetDonorFromEmailCompletedEventArgs> GetDonorFromEmailCompleted;
+        
+        public event System.EventHandler<GetItemCategoriesCompletedEventArgs> GetItemCategoriesCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -672,6 +1053,144 @@ namespace HabitatReStoreMobile.ServiceReference1 {
             }
             base.InvokeAsync(this.onBeginInsertDonorDelegate, new object[] {
                         donorInfo}, this.onEndInsertDonorDelegate, this.onInsertDonorCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult HabitatReStoreMobile.ServiceReference1.IHabitatService.BeginInsertDonation(HabitatReStoreMobile.ServiceReference1.DonationInfo donationInfo, HabitatReStoreMobile.ServiceReference1.ItemInfo itemInfo, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginInsertDonation(donationInfo, itemInfo, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        int HabitatReStoreMobile.ServiceReference1.IHabitatService.EndInsertDonation(System.IAsyncResult result) {
+            return base.Channel.EndInsertDonation(result);
+        }
+        
+        private System.IAsyncResult OnBeginInsertDonation(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            HabitatReStoreMobile.ServiceReference1.DonationInfo donationInfo = ((HabitatReStoreMobile.ServiceReference1.DonationInfo)(inValues[0]));
+            HabitatReStoreMobile.ServiceReference1.ItemInfo itemInfo = ((HabitatReStoreMobile.ServiceReference1.ItemInfo)(inValues[1]));
+            return ((HabitatReStoreMobile.ServiceReference1.IHabitatService)(this)).BeginInsertDonation(donationInfo, itemInfo, callback, asyncState);
+        }
+        
+        private object[] OnEndInsertDonation(System.IAsyncResult result) {
+            int retVal = ((HabitatReStoreMobile.ServiceReference1.IHabitatService)(this)).EndInsertDonation(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnInsertDonationCompleted(object state) {
+            if ((this.InsertDonationCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.InsertDonationCompleted(this, new InsertDonationCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void InsertDonationAsync(HabitatReStoreMobile.ServiceReference1.DonationInfo donationInfo, HabitatReStoreMobile.ServiceReference1.ItemInfo itemInfo) {
+            this.InsertDonationAsync(donationInfo, itemInfo, null);
+        }
+        
+        public void InsertDonationAsync(HabitatReStoreMobile.ServiceReference1.DonationInfo donationInfo, HabitatReStoreMobile.ServiceReference1.ItemInfo itemInfo, object userState) {
+            if ((this.onBeginInsertDonationDelegate == null)) {
+                this.onBeginInsertDonationDelegate = new BeginOperationDelegate(this.OnBeginInsertDonation);
+            }
+            if ((this.onEndInsertDonationDelegate == null)) {
+                this.onEndInsertDonationDelegate = new EndOperationDelegate(this.OnEndInsertDonation);
+            }
+            if ((this.onInsertDonationCompletedDelegate == null)) {
+                this.onInsertDonationCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnInsertDonationCompleted);
+            }
+            base.InvokeAsync(this.onBeginInsertDonationDelegate, new object[] {
+                        donationInfo,
+                        itemInfo}, this.onEndInsertDonationDelegate, this.onInsertDonationCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult HabitatReStoreMobile.ServiceReference1.IHabitatService.BeginGetDonorFromEmail(string email, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetDonorFromEmail(email, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        HabitatReStoreMobile.ServiceReference1.DonorInfo HabitatReStoreMobile.ServiceReference1.IHabitatService.EndGetDonorFromEmail(System.IAsyncResult result) {
+            return base.Channel.EndGetDonorFromEmail(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetDonorFromEmail(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string email = ((string)(inValues[0]));
+            return ((HabitatReStoreMobile.ServiceReference1.IHabitatService)(this)).BeginGetDonorFromEmail(email, callback, asyncState);
+        }
+        
+        private object[] OnEndGetDonorFromEmail(System.IAsyncResult result) {
+            HabitatReStoreMobile.ServiceReference1.DonorInfo retVal = ((HabitatReStoreMobile.ServiceReference1.IHabitatService)(this)).EndGetDonorFromEmail(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetDonorFromEmailCompleted(object state) {
+            if ((this.GetDonorFromEmailCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetDonorFromEmailCompleted(this, new GetDonorFromEmailCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetDonorFromEmailAsync(string email) {
+            this.GetDonorFromEmailAsync(email, null);
+        }
+        
+        public void GetDonorFromEmailAsync(string email, object userState) {
+            if ((this.onBeginGetDonorFromEmailDelegate == null)) {
+                this.onBeginGetDonorFromEmailDelegate = new BeginOperationDelegate(this.OnBeginGetDonorFromEmail);
+            }
+            if ((this.onEndGetDonorFromEmailDelegate == null)) {
+                this.onEndGetDonorFromEmailDelegate = new EndOperationDelegate(this.OnEndGetDonorFromEmail);
+            }
+            if ((this.onGetDonorFromEmailCompletedDelegate == null)) {
+                this.onGetDonorFromEmailCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetDonorFromEmailCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetDonorFromEmailDelegate, new object[] {
+                        email}, this.onEndGetDonorFromEmailDelegate, this.onGetDonorFromEmailCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult HabitatReStoreMobile.ServiceReference1.IHabitatService.BeginGetItemCategories(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetItemCategories(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<HabitatReStoreMobile.ServiceReference1.ItemCategory> HabitatReStoreMobile.ServiceReference1.IHabitatService.EndGetItemCategories(System.IAsyncResult result) {
+            return base.Channel.EndGetItemCategories(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetItemCategories(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((HabitatReStoreMobile.ServiceReference1.IHabitatService)(this)).BeginGetItemCategories(callback, asyncState);
+        }
+        
+        private object[] OnEndGetItemCategories(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<HabitatReStoreMobile.ServiceReference1.ItemCategory> retVal = ((HabitatReStoreMobile.ServiceReference1.IHabitatService)(this)).EndGetItemCategories(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetItemCategoriesCompleted(object state) {
+            if ((this.GetItemCategoriesCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetItemCategoriesCompleted(this, new GetItemCategoriesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetItemCategoriesAsync() {
+            this.GetItemCategoriesAsync(null);
+        }
+        
+        public void GetItemCategoriesAsync(object userState) {
+            if ((this.onBeginGetItemCategoriesDelegate == null)) {
+                this.onBeginGetItemCategoriesDelegate = new BeginOperationDelegate(this.OnBeginGetItemCategories);
+            }
+            if ((this.onEndGetItemCategoriesDelegate == null)) {
+                this.onEndGetItemCategoriesDelegate = new EndOperationDelegate(this.OnEndGetItemCategories);
+            }
+            if ((this.onGetItemCategoriesCompletedDelegate == null)) {
+                this.onGetItemCategoriesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetItemCategoriesCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetItemCategoriesDelegate, null, this.onEndGetItemCategoriesDelegate, this.onGetItemCategoriesCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -798,6 +1317,45 @@ namespace HabitatReStoreMobile.ServiceReference1 {
             public int EndInsertDonor(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 int _result = ((int)(base.EndInvoke("InsertDonor", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginInsertDonation(HabitatReStoreMobile.ServiceReference1.DonationInfo donationInfo, HabitatReStoreMobile.ServiceReference1.ItemInfo itemInfo, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = donationInfo;
+                _args[1] = itemInfo;
+                System.IAsyncResult _result = base.BeginInvoke("InsertDonation", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public int EndInsertDonation(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                int _result = ((int)(base.EndInvoke("InsertDonation", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetDonorFromEmail(string email, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = email;
+                System.IAsyncResult _result = base.BeginInvoke("GetDonorFromEmail", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public HabitatReStoreMobile.ServiceReference1.DonorInfo EndGetDonorFromEmail(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                HabitatReStoreMobile.ServiceReference1.DonorInfo _result = ((HabitatReStoreMobile.ServiceReference1.DonorInfo)(base.EndInvoke("GetDonorFromEmail", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetItemCategories(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("GetItemCategories", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<HabitatReStoreMobile.ServiceReference1.ItemCategory> EndGetItemCategories(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<HabitatReStoreMobile.ServiceReference1.ItemCategory> _result = ((System.Collections.ObjectModel.ObservableCollection<HabitatReStoreMobile.ServiceReference1.ItemCategory>)(base.EndInvoke("GetItemCategories", _args, result)));
                 return _result;
             }
         }

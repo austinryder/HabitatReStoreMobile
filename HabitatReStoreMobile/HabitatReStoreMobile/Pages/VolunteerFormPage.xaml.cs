@@ -16,14 +16,17 @@ namespace HabitatReStoreMobile.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VolunteerFormPage : ContentPage
-    {
-        HabitatServiceClient service;      
-
+    {   
         public VolunteerFormPage()
         {
             InitializeComponent();
 
             InitializePickers();
+
+            if (App.service == null)
+            {
+                App.InitializeService();
+            }
         }
 
         private void btnSubmit_Clicked(object sender, EventArgs e)
@@ -32,8 +35,10 @@ namespace HabitatReStoreMobile.Pages
 
             if (ValidateAll(newVolunteer))
             {
-                InitializeService();
-                InsertToDatabase(newVolunteer);
+                btnSubmit.IsEnabled = false;
+                DependencyService.Get<IToast>().ShortAlert("Submitting... please wait.");
+
+                InsertVolunteerToDatabase(newVolunteer);
             }
         }
 
@@ -48,8 +53,8 @@ namespace HabitatReStoreMobile.Pages
             lName = entLName.Text;
             mName = entMName.Text;
             email = entEmail.Text;
-            //strip non-numeric characters
-            phone = Regex.Replace(entPhone.Text, "[^0-9]", "");
+            //strip non-numeric characters, if null return empty space
+            phone = Regex.Replace(entPhone.Text ?? "", "[^0-9]", "");
             ssn = entSSN.Text;
             city = entCity.Text;
             zip = entZIP.Text;
@@ -177,10 +182,10 @@ namespace HabitatReStoreMobile.Pages
                 lblVPhone.Text = "";
             }
 
-            //at least 18 check
-            if (GetAge(newVolunteer.DOB) < 18)
+            //at least 14 check
+            if (GetAge(newVolunteer.DOB) < 14)
             {
-                lblVDOB.Text = "You must be at least 18 years of age to volunteer";
+                lblVDOB.Text = "You must be at least 14 years of age to volunteer";
                 valid = false;
             }
             else
@@ -204,54 +209,63 @@ namespace HabitatReStoreMobile.Pages
             return age;
         }
 
-        private void InitializeService()
-        {
-            BasicHttpBinding binding = new BasicHttpBinding
-            {
-                Name = "basicHttpBinding",
-                MaxBufferSize = 2147483647,
-                MaxReceivedMessageSize = 2147483647
-            };
-            TimeSpan timeout = new TimeSpan(0, 0, 30);
-            binding.SendTimeout = timeout;
-            binding.OpenTimeout = timeout;
-            binding.ReceiveTimeout = timeout;
-
-            service = new HabitatServiceClient(binding, App.SERVICEADDRESS);
-        }
-        private async void InsertToDatabase(VolunteerInfo volunteer)
+        private async void InsertVolunteerToDatabase(VolunteerInfo volunteer)
         {
             try
             {
-                service.InsertVolunteerCompleted += new EventHandler<InsertVolunteerCompletedEventArgs>(Service_InsertVolunteerCompleted);
-                service.InsertVolunteerAsync(volunteer);
+                App.service.InsertVolunteerCompleted += new EventHandler<InsertVolunteerCompletedEventArgs>(Service_InsertVolunteerCompleted);
+                App.service.InsertVolunteerAsync(volunteer);
             }
             catch (Exception ex)
             {
+                DependencyService.Get<IToast>().LongAlert("Error, unable to access server.");
+                btnSubmit.IsEnabled = true;
                 Debug.WriteLine(ex);
             }
         }
 
         private void Service_InsertVolunteerCompleted(object sender, InsertVolunteerCompletedEventArgs e)
         {
-            try
+            bool success = false;
+            string message = "";
+
+            if (e.Error == null)
             {
                 int result = e.Result;
                 if (result == 1)
                 {
-                    Device.BeginInvokeOnMainThread(() => DependencyService.Get<IToast>().LongAlert("Volunteer form successfully submitted."));
-                    Device.BeginInvokeOnMainThread(() => Navigation.PopToRootAsync());
+                    success = true;
+                    message = "Volunteer form successfully submitted";
                 }
                 else
                 {
-                    Device.BeginInvokeOnMainThread(() => DependencyService.Get<IToast>().LongAlert("Error submitting volunteer form."));
+                    success = false;
+                    message = "Error submitting volunteer form.";
                 }
             }
-            catch(Exception ex)
+            else
             {
-                Device.BeginInvokeOnMainThread(() => DependencyService.Get<IToast>().LongAlert("Error submitting volunteer form."));
-                Debug.WriteLine(ex.InnerException);
+                success = false;
+                message = "Error submitting volunteer form.";
+                Debug.WriteLine(e.Error);
             }
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                OnCompleted(success, message);
+            });
+        }
+
+        private void OnCompleted(bool success, string message)
+        {
+            DependencyService.Get<IToast>().LongAlert(message);
+
+            if (success)
+            {
+                Navigation.PopToRootAsync();
+            }
+
+            btnSubmit.IsEnabled = true;
         }
 
         private void InitializePickers()

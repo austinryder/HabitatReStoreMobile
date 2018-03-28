@@ -19,6 +19,24 @@
   <wsdl:message name="IHabitatService_InsertDonor_OutputMessage">
     <wsdl:part name="parameters" element="tns:InsertDonorResponse" />
   </wsdl:message>
+  <wsdl:message name="IHabitatService_InsertDonation_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertDonation" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_InsertDonation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertDonationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetDonorFromEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDonorFromEmail" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetDonorFromEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDonorFromEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetItemCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemCategories" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetItemCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemCategoriesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IHabitatService">
     <wsdl:operation name="InsertVolunteer">
       <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/InsertVolunteer" message="tns:IHabitatService_InsertVolunteer_InputMessage" />
@@ -27,6 +45,18 @@
     <wsdl:operation name="InsertDonor">
       <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/InsertDonor" message="tns:IHabitatService_InsertDonor_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/InsertDonorResponse" message="tns:IHabitatService_InsertDonor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertDonation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/InsertDonation" message="tns:IHabitatService_InsertDonation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/InsertDonationResponse" message="tns:IHabitatService_InsertDonation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDonorFromEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetDonorFromEmail" message="tns:IHabitatService_GetDonorFromEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetDonorFromEmailResponse" message="tns:IHabitatService_GetDonorFromEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetItemCategories" message="tns:IHabitatService_GetItemCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetItemCategoriesResponse" message="tns:IHabitatService_GetItemCategories_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IHabitatService" type="tns:IHabitatService">
@@ -42,6 +72,33 @@
     </wsdl:operation>
     <wsdl:operation name="InsertDonor">
       <soap:operation soapAction="http://tempuri.org/IHabitatService/InsertDonor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertDonation">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/InsertDonation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDonorFromEmail">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/GetDonorFromEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemCategories">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/GetItemCategories" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -16,6 +16,7 @@
       <xs:element minOccurs="0" name="SSN" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Status_Map_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Volunteer_ID" type="xs:int" />
       <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -25,7 +26,7 @@
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="DOB" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Donor_ID" type="xs:int" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="First_Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Gender" type="ser:char" />
@@ -38,4 +39,40 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DonorInfo" nillable="true" type="tns:DonorInfo" />
+  <xs:complexType name="DonationInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bypass_Flag" type="xs:boolean" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Donor_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status_Map_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Store_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DonationInfo" nillable="true" type="tns:DonationInfo" />
+  <xs:complexType name="ItemInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Donation_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Donation_Image" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Item_Category_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Item_ID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItemInfo" nillable="true" type="tns:ItemInfo" />
+  <xs:complexType name="ArrayOfItemCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemCategory" nillable="true" type="tns:ItemCategory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItemCategory" nillable="true" type="tns:ArrayOfItemCategory" />
+  <xs:complexType name="ItemCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Item_Category_ID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItemCategory" nillable="true" type="tns:ItemCategory" />
 </xs:schema>

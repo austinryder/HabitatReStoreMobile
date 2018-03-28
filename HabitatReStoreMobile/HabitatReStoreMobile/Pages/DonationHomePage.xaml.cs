@@ -17,9 +17,9 @@ namespace HabitatReStoreMobile.Pages
             InitializeComponent();
         }
 
-        private void btnGoPickupForm_Clicked(object sender, EventArgs e)
+        private void btnGoReturningDonorForm_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new DonationPickupFormPage());
+            Navigation.PushAsync(new ReturningDonorPage());
         }
 
         private void btnGoDonorForm_Clicked(object sender, EventArgs e)

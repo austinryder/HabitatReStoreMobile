@@ -6,8 +6,9 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Donate!"/>
-            <Button x:Name="btnGoPickupForm" Text="Sign Up for Donation Pickup" Clicked="btnGoPickupForm_Clicked" />
-            <Button x:Name="btnGoDonorForm" Text="Enter Your Information" Clicked="btnGoDonorForm_Clicked"/>
+            <Label Text="Before donating, you must enter your information." />
+            <Button x:Name="btnGoDonorForm" Text="New Donor" Clicked="btnGoDonorForm_Clicked"/>
+            <Button x:Name="btnReturningDonor" Text="Returning Donor" Clicked="btnGoReturningDonorForm_Clicked" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
