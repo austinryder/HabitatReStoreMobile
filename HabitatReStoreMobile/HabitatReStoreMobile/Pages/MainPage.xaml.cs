@@ -19,11 +19,13 @@ namespace HabitatReStoreMobile.Pages
 
             var pageHome = new NavigationItem() { Title = "Home", Icon = "icHome.png", Page = typeof(HomePage) };
             var pageFindReStore = new NavigationItem() { Title = "Find a ReStore", Icon = "icFind.png", Page = typeof(FindReStorePage) };
+            var pageRecentItems = new NavigationItem() { Title = "Recent Items", Icon = "icItems.png", Page = typeof(RecentItemsPage) };
             var pageDonationHome = new NavigationItem() { Title = "Donate", Icon = "icDonate.png", Page = typeof(DonationHomePage) };
             var pageVolunteerHome = new NavigationItem() { Title = "Volunteer", Icon = "icVolunteer.png", Page = typeof(VolunteerHomePage) };
 
             menuList.Add(pageHome);
             menuList.Add(pageFindReStore);
+            menuList.Add(pageRecentItems);
             menuList.Add(pageDonationHome);
             menuList.Add(pageVolunteerHome);
 

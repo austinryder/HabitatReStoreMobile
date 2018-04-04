@@ -94,7 +94,7 @@ namespace HabitatReStoreMobile.Pages
 
                     currentLocation = new Pin
                     {
-                        Type = PinType.Place,
+                        Type = PinType.SearchResult,
                         Position = new Position(position.Latitude, position.Longitude),
                         Label = "You",
                     };

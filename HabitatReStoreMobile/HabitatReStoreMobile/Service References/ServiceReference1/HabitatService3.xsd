@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/HabitatWCFService" />
+  <xs:import schemaLocation="http://localhost/HabitatWCFService/HabitatService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/HabitatWCFService" />
   <xs:element name="InsertVolunteer">
     <xs:complexType>
       <xs:sequence>
@@ -44,6 +44,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetItemsWithImageAndDescription">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemsWithImageAndDescriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetItemsWithImageAndDescriptionResult" nillable="true" type="q5:ArrayOfItemInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetDonorFromEmail">
     <xs:complexType>
       <xs:sequence>
@@ -54,7 +66,7 @@
   <xs:element name="GetDonorFromEmailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetDonorFromEmailResult" nillable="true" type="q5:DonorInfo" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetDonorFromEmailResult" nillable="true" type="q6:DonorInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -66,7 +78,19 @@
   <xs:element name="GetItemCategoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetItemCategoriesResult" nillable="true" type="q6:ArrayOfItemCategory" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetItemCategoriesResult" nillable="true" type="q7:ArrayOfItemCategory" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVolunteerCategories">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetVolunteerCategoriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetVolunteerCategoriesResult" nillable="true" type="q8:ArrayOfVolunteerCategory" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

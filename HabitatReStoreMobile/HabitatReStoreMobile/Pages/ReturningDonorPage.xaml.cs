@@ -24,7 +24,7 @@ namespace HabitatReStoreMobile.Pages
         {
             InitializeComponent();
 
-            if (App.service.State == null)
+            if (App.service == null)
             {
                 App.InitializeService();
             }
@@ -55,7 +55,9 @@ namespace HabitatReStoreMobile.Pages
         {
             try
             {
-                App.service.GetDonorFromEmailCompleted += new EventHandler<GetDonorFromEmailCompletedEventArgs>(Service_GetDonorFromEmailCompleted);
+                //first removes handler so that this event can only be subscribed to once
+                App.service.GetDonorFromEmailCompleted -= Service_GetDonorFromEmailCompleted;
+                App.service.GetDonorFromEmailCompleted += Service_GetDonorFromEmailCompleted;
                 App.service.GetDonorFromEmailAsync(email);
             }
             catch (Exception ex)
@@ -78,6 +80,7 @@ namespace HabitatReStoreMobile.Pages
 
                 if (result.Email == email)
                 {
+                    donor = result;
                     success = true;
                     message = "Donor information succesfully retrieved.";
                 }
@@ -96,21 +99,15 @@ namespace HabitatReStoreMobile.Pages
 
             Device.BeginInvokeOnMainThread(() =>
             {
-                OnCompleted(success, message, result);
+                DependencyService.Get<IToast>().ShortAlert(message);
+
+                btnSubmit.IsEnabled = true;
+
+                if (success)
+                {
+                    this.Navigation.PushAsync(new DonationPickupFormPage(donor));
+                }
             });
-        }
-
-        private void OnCompleted(bool success, string message, DonorInfo result)
-        {
-            DependencyService.Get<IToast>().ShortAlert(message);
-
-            if (success)
-            {
-                donor = result;
-                Navigation.PushAsync(new DonationPickupFormPage(donor));
-            }
-
-            btnSubmit.IsEnabled = true;
         }
     }
 }

@@ -183,7 +183,15 @@
     <BundleResource Include="Resources\noimage.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\imgLogo.png" />
+    <BundleResource Include="Resources\icItems.png" />
+    <BundleResource Include="Resources\icVolunteer.png" />
+    <BundleResource Include="Resources\icDonate.png" />
+    <BundleResource Include="Resources\icFind.png" />
+    <BundleResource Include="Resources\icHome.png" />
+    <Content Include="Resources\icon.png" />
+    <BundleResource Include="Resources\imgEmployees.jpg" />
+    <BundleResource Include="Resources\imgReStoreBlack.png" />
+    <BundleResource Include="Resources\imgVolunteers.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

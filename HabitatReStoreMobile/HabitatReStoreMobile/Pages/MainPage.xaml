@@ -10,12 +10,13 @@
 
                 <!-- Navigation Header -->
                 <StackLayout Orientation="Horizontal" BackgroundColor="#51B948" HeightRequest="100">
-                    <Image Source="imgLogo.png"
+                    <Image Source="icon.png"
                            HorizontalOptions="Center"
                            Aspect="AspectFit"
                            Margin="10, 0, 0, 0"/>
                     <Label Text="Habitat ReStore"
-                           FontSize="20"
+                           FontSize="24"
+                           FontAttributes="Bold"
                            VerticalOptions="CenterAndExpand"
                            TextColor="White"
                            HorizontalOptions="End"/>
@@ -37,8 +38,8 @@
                                          Spacing="20">
 
                                     <Image Source="{Binding Icon}"
-                                         WidthRequest="40"
-                                         HeightRequest="40"
+                                         WidthRequest="20"
+                                         HeightRequest="20"
                                          VerticalOptions="Center" />
 
                                     <Label Text="{Binding Title}"

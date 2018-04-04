@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Frame OutlineColor="#005596" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="20" Margin="20,10,20,0">
+                <Frame OutlineColor="#005596" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" Margin="20,10,20,0">
                     <Image x:Name="imgDonationPhoto" Source="noimage.png" HorizontalOptions="Center" WidthRequest="340" HeightRequest="180" Margin="0, 0, 0, 0"/>
                 </Frame>
                 <StackLayout Orientation="Horizontal">
@@ -16,9 +16,10 @@
                 <!--Item Category Picker-->
                 <Label Text="Select Item Category:" StyleClass="PickerLabel"/>
                 <Picker x:Name="pickItemCategory"/>
+                <Entry x:Name="entDescription" Placeholder="Description"/>
                 <!--Switch to use Donor Address-->
                 <StackLayout Orientation="Horizontal">
-                    <Switch x:Name="swUseDonorAddress" Toggled="swUseDonorAddress_Toggled" IsToggled="False" Margin="0, 20, 0, 0"/>
+                    <Switch x:Name="swUseDonorAddress" Toggled="swUseDonorAddress_Toggled" IsToggled="False" Margin="20, 0, 0, 0"/>
                     <Label Text="Use same address as donor?" StyleClass="PickerLabel"/>
                 </StackLayout>
                 <Entry x:Name="entAddress" Placeholder="Address" />

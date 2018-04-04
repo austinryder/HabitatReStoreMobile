@@ -26,7 +26,7 @@ namespace HabitatReStoreMobile.Pages
 
             InitializePickers();
 
-            if (App.service.State == null)
+            if (App.service == null)
             {
                 App.InitializeService();
             }
@@ -81,11 +81,13 @@ namespace HabitatReStoreMobile.Pages
             return newDonor;
         }
 
-        private async void InsertDonorToDatabase(DonorInfo donor)
+        private void InsertDonorToDatabase(DonorInfo donor)
         {
             try
             {
-                App.service.InsertDonorCompleted += new EventHandler<InsertDonorCompletedEventArgs>(Service_InsertDonorCompleted);
+                //first removes handler so that this event can only be subscribed to once
+                App.service.InsertDonorCompleted -= Service_InsertDonorCompleted;
+                App.service.InsertDonorCompleted += Service_InsertDonorCompleted;
                 App.service.InsertDonorAsync(donor);
             }
             catch (Exception ex)
@@ -124,20 +126,15 @@ namespace HabitatReStoreMobile.Pages
 
             Device.BeginInvokeOnMainThread(() =>
             {
-                OnCompleted(success, message);
+                DependencyService.Get<IToast>().LongAlert(message);
+
+                btnSubmit.IsEnabled = true;
+
+                if (success)
+                {
+                    Navigation.PushAsync(new DonationPickupFormPage(newDonor));
+                }
             });
-        }
-
-        private void OnCompleted(bool success, string message)
-        {
-            DependencyService.Get<IToast>().LongAlert(message);
-
-            if (success)
-            {
-                Navigation.PushAsync(new DonationPickupFormPage(newDonor));
-            }
-
-            btnSubmit.IsEnabled = true;
         }
 
         private bool ValidateAll(DonorInfo newDonor)

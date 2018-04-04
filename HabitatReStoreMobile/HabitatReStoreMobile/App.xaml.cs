@@ -11,7 +11,7 @@ namespace HabitatReStoreMobile
 {
     public partial class App : Application
     {
-        public static EndpointAddress SERVICEADDRESS = new EndpointAddress("http://b25cf81c.ngrok.io/HabitatWCFService/HabitatService.svc");
+        public static EndpointAddress SERVICEADDRESS = new EndpointAddress("http://639991bf.ngrok.io/HabitatWCFService/HabitatService.svc");
         public static HabitatServiceClient service;
         public App()
         {

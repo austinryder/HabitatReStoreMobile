@@ -24,7 +24,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>0</WarningLevel>
+    <WarningLevel>1</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -40,8 +40,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IToast.cs" />
+    <Compile Include="Models\DonationItem.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\Validator.cs" />
+    <Compile Include="Models\VolunteerRoleItem.cs" />
     <Compile Include="Pages\DonationHomePage.xaml.cs">
       <DependentUpon>DonationHomePage.xaml</DependentUpon>
     </Compile>
@@ -59,6 +61,9 @@
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RecentItemsPage.xaml.cs">
+      <DependentUpon>RecentItemsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReturningDonorPage.xaml.cs">
       <DependentUpon>ReturningDonorPage.xaml</DependentUpon>
@@ -93,6 +98,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ServiceReference1\HabitatReStoreMobile.ServiceReference1.ItemCategory.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceReference1\HabitatReStoreMobile.ServiceReference1.ItemInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceReference1\HabitatReStoreMobile.ServiceReference1.VolunteerCategory.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ServiceReference1\HabitatReStoreService.wsdl" />
@@ -137,17 +148,28 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\imgLogo.png" />
+    <Content Include="Images\imgEmployees.jpg" />
+    <Content Include="Images\icDonate.png" />
+    <Content Include="Images\icFind.png" />
+    <Content Include="Images\icHome.png" />
+    <Content Include="Images\icItems.png" />
+    <Content Include="Images\icVolunteer.png" />
+    <Content Include="Images\icon.png" />
     <Content Include="Images\noimage.png" />
-    <None Include="Service References\ServiceReference1\HabitatService.disco" />
-    <None Include="Service References\ServiceReference1\HabitatService.wsdl" />
+    <Content Include="Images\imgReStoreBlack.png" />
+    <Content Include="Images\imgVolunteers.jpg" />
     <None Include="Service References\ServiceReference1\HabitatService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\HabitatService1.xsd">
+    <None Include="Service References\ServiceReference1\HabitatService1.disco" />
+    <None Include="Service References\ServiceReference1\HabitatService1.wsdl" />
+    <None Include="Service References\ServiceReference1\HabitatService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\HabitatService2.xsd">
+    <None Include="Service References\ServiceReference1\HabitatService31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\HabitatService32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference1\Reference.svcmap">
@@ -221,6 +243,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\ReturningDonorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\RecentItemsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

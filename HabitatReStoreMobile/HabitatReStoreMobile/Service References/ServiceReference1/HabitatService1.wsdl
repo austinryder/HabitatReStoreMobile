@@ -2,9 +2,10 @@
 <wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HabitatService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/HabitatWCFService" />
+      <xsd:import schemaLocation="http://localhost/HabitatWCFService/HabitatService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost/HabitatWCFService/HabitatService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost/HabitatWCFService/HabitatService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/HabitatWCFService" />
+      <xsd:import schemaLocation="http://localhost/HabitatWCFService/HabitatService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IHabitatService_InsertVolunteer_InputMessage">
@@ -25,6 +26,12 @@
   <wsdl:message name="IHabitatService_InsertDonation_OutputMessage">
     <wsdl:part name="parameters" element="tns:InsertDonationResponse" />
   </wsdl:message>
+  <wsdl:message name="IHabitatService_GetItemsWithImageAndDescription_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemsWithImageAndDescription" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetItemsWithImageAndDescription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemsWithImageAndDescriptionResponse" />
+  </wsdl:message>
   <wsdl:message name="IHabitatService_GetDonorFromEmail_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDonorFromEmail" />
   </wsdl:message>
@@ -36,6 +43,12 @@
   </wsdl:message>
   <wsdl:message name="IHabitatService_GetItemCategories_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetItemCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetVolunteerCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVolunteerCategories" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetVolunteerCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVolunteerCategoriesResponse" />
   </wsdl:message>
   <wsdl:portType name="IHabitatService">
     <wsdl:operation name="InsertVolunteer">
@@ -50,6 +63,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/InsertDonation" message="tns:IHabitatService_InsertDonation_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/InsertDonationResponse" message="tns:IHabitatService_InsertDonation_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetItemsWithImageAndDescription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetItemsWithImageAndDescription" message="tns:IHabitatService_GetItemsWithImageAndDescription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetItemsWithImageAndDescriptionResponse" message="tns:IHabitatService_GetItemsWithImageAndDescription_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetDonorFromEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetDonorFromEmail" message="tns:IHabitatService_GetDonorFromEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetDonorFromEmailResponse" message="tns:IHabitatService_GetDonorFromEmail_OutputMessage" />
@@ -57,6 +74,10 @@
     <wsdl:operation name="GetItemCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetItemCategories" message="tns:IHabitatService_GetItemCategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetItemCategoriesResponse" message="tns:IHabitatService_GetItemCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVolunteerCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetVolunteerCategories" message="tns:IHabitatService_GetVolunteerCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetVolunteerCategoriesResponse" message="tns:IHabitatService_GetVolunteerCategories_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IHabitatService" type="tns:IHabitatService">
@@ -88,6 +109,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetItemsWithImageAndDescription">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/GetItemsWithImageAndDescription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetDonorFromEmail">
       <soap:operation soapAction="http://tempuri.org/IHabitatService/GetDonorFromEmail" style="document" />
       <wsdl:input>
@@ -106,10 +136,19 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetVolunteerCategories">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/GetVolunteerCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="HabitatService">
     <wsdl:port name="BasicHttpBinding_IHabitatService" binding="tns:BasicHttpBinding_IHabitatService">
-      <soap:address location="http://192.168.1.5/HabitatWCFService/HabitatService.svc" />
+      <soap:address location="http://localhost/HabitatWCFService/HabitatService.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

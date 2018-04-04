@@ -4,8 +4,19 @@
              x:Class="HabitatReStoreMobile.Pages.HomePage"
              Title="Home">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Habitat for Humanity ReStore"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Frame OutlineColor="#005596" CornerRadius="5" Margin="20,10,20,10" Padding="5,5,5,5">
+                    <Image Source="imgReStoreBlack.png" Aspect="AspectFill"/>
+                </Frame>
+                <Label Margin="20,0,20,0" Text="ReStores" FontSize="36" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label Margin="20,5,20,5" Text="Visit our Habitat for Humanity ReStores Serving Forsyth County and Stokes County!"
+                       FontSize="Medium" />
+                <Label Margin="20,5,20,5" Text="Habitat ReStores are home improvement stores that accept small and large donations of new or 
+                                                gently used furniture, appliances, housewares, building materials and more. Proceeds from the 
+                                                sales of these items help Habitat's work in our community."
+                       FontSize="Small" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -11,22 +11,26 @@ using Xamarin.Forms.Xaml;
 using HabitatReStoreMobile.ServiceReference1;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
 
 namespace HabitatReStoreMobile.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VolunteerFormPage : ContentPage
-    {   
+    {
+        ObservableCollection<VolunteerCategory> volunteerCategories = new ObservableCollection<VolunteerCategory>();
+        List<VolunteerRoleItem> volunteerRoleItems = new List<VolunteerRoleItem>();
+
         public VolunteerFormPage()
         {
             InitializeComponent();
-
-            InitializePickers();
 
             if (App.service == null)
             {
                 App.InitializeService();
             }
+
+            InitializePickers();
         }
 
         private void btnSubmit_Clicked(object sender, EventArgs e)
@@ -48,6 +52,7 @@ namespace HabitatReStoreMobile.Pages
             string state, role, contactMethod;
             char gender;
             DateTime dob;
+            ObservableCollection<int> roleIDs = new ObservableCollection<int>();
 
             fName = entFName.Text;
             lName = entLName.Text;
@@ -62,8 +67,16 @@ namespace HabitatReStoreMobile.Pages
             address2 = entAddress2.Text;
             gender = pickGender.SelectedItem.ToString()[0];
             state = pickState.SelectedItem.ToString();
-            role = pickRole.SelectedItem.ToString();
-            contactMethod = pickRole.SelectedItem.ToString();
+            contactMethod = pickContactMethod.SelectedItem.ToString();
+
+            //get selected roles
+            foreach (VolunteerRoleItem vc in rolePickerList.ItemsSource)
+            {
+                if (vc.Selected)
+                {
+                    roleIDs.Add(vc.Category_ID);
+                }
+            }
 
             dob = pickDOB.Date;
 
@@ -82,6 +95,7 @@ namespace HabitatReStoreMobile.Pages
             newVolunteer.Address = address;
             newVolunteer.Address2 = address2;
             newVolunteer.SSN = ssn;
+            newVolunteer.Selected_Role_IDs = roleIDs;
 
             return newVolunteer;
         }
@@ -193,6 +207,17 @@ namespace HabitatReStoreMobile.Pages
                 lblVDOB.Text = "";
             }
 
+            //has selected at least one role check
+            if (newVolunteer.Selected_Role_IDs.Count == 0)
+            {
+                lblVDOB.Text = "Please select at least one role.";
+                valid = false;
+            }
+            else
+            {
+                lblVRoles.Text = "";
+            }
+
             return valid;
         }
 
@@ -209,11 +234,13 @@ namespace HabitatReStoreMobile.Pages
             return age;
         }
 
-        private async void InsertVolunteerToDatabase(VolunteerInfo volunteer)
+        private void InsertVolunteerToDatabase(VolunteerInfo volunteer)
         {
             try
             {
-                App.service.InsertVolunteerCompleted += new EventHandler<InsertVolunteerCompletedEventArgs>(Service_InsertVolunteerCompleted);
+                //first removes handler so that this event can only be subscribed to once
+                App.service.InsertVolunteerCompleted -= Service_InsertVolunteerCompleted;
+                App.service.InsertVolunteerCompleted += Service_InsertVolunteerCompleted;
                 App.service.InsertVolunteerAsync(volunteer);
             }
             catch (Exception ex)
@@ -252,40 +279,87 @@ namespace HabitatReStoreMobile.Pages
 
             Device.BeginInvokeOnMainThread(() =>
             {
-                OnCompleted(success, message);
+                DependencyService.Get<IToast>().LongAlert(message);
+
+                btnSubmit.IsEnabled = true;
+
+                if (success)
+                {
+                    Navigation.PopToRootAsync();
+                }
             });
-        }
-
-        private void OnCompleted(bool success, string message)
-        {
-            DependencyService.Get<IToast>().LongAlert(message);
-
-            if (success)
-            {
-                Navigation.PopToRootAsync();
-            }
-
-            btnSubmit.IsEnabled = true;
         }
 
         private void InitializePickers()
         {
             List<string> contactMethods = new List<string> { "Email", "Phone" };
-            List<string> volunteerRoleOptions = new List<string> { "Door Hanger", "Cashier", "Cost Researcher", "Sales Floor", "Back Room", "Pickup Helper" };
             List<string> genderOptions = new List<string> { "M", "F", "Other" };
             List<string> stateOptions = new List<string> { "AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY" };
 
             pickGender.ItemsSource = genderOptions;
             pickState.ItemsSource = stateOptions;
-            pickRole.ItemsSource = volunteerRoleOptions;
             pickContactMethod.ItemsSource = contactMethods;
 
             pickGender.SelectedIndex = 0;
             pickState.SelectedItem = "NC";
-            pickRole.SelectedIndex = 0;
             pickContactMethod.SelectedIndex = 0;
 
             pickDOB.Date = DateTime.Today;
+
+            //get possible values from volunteer category
+            try
+            {
+                //first removes handler so that this event can only be subscribed to once
+                App.service.GetVolunteerCategoriesCompleted -= Service_GetVolunteerCategoriesCompleted;
+                App.service.GetVolunteerCategoriesCompleted += Service_GetVolunteerCategoriesCompleted;
+                App.service.GetVolunteerCategoriesAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        private void Service_GetVolunteerCategoriesCompleted(object sender, GetVolunteerCategoriesCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                volunteerCategories = e.Result;
+
+                foreach (VolunteerCategory vc in volunteerCategories)
+                {
+                    volunteerRoleItems.Add(new VolunteerRoleItem()
+                    {
+                        Category = vc.Description,
+                        Category_ID = vc.Volunteer_Category_ID,
+                        Selected = false
+                    });
+                }
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    rolePickerList.ItemsSource = volunteerRoleItems;
+                });
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    DependencyService.Get<IToast>().ShortAlert("Unable to connect to server.");
+                });
+                Debug.WriteLine(e.Error);
+            }
+        }
+
+        //deselect item when selected, so that selected wont show in UI
+        private void rolePickerList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            rolePickerList.SelectedItem = null;
+        }
+
+        private void swRole_Toggled(object sender, ToggledEventArgs e)
+        {
+            
         }
     }
 }

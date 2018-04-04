@@ -41,8 +41,27 @@
                 <Label Text="Preferred Method of Contact:" StyleClass="PickerLabel"/>
                 <Picker x:Name="pickContactMethod"/>
                 <!--Role Picker-->
-                <Label Text="Preferred Role:" StyleClass="PickerLabel"/>
-                <Picker x:Name="pickRole"/>
+                <Label Text="Preferred Roles:" StyleClass="PickerLabel"/>
+                <Label x:Name="lblVRoles" StyleClass="Validation"/>
+                <ListView x:Name="rolePickerList" Margin="20, 0, 20, 0" ItemSelected="rolePickerList_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!--Role Options-->
+                                <StackLayout>
+                                    <Switch x:Name="swRole"
+                                            Toggled="swRole_Toggled"
+                                            IsToggled="{Binding Selected}"
+                                            Margin="0, 10, 0, 0"/>
+
+                                    <Label Text="{Binding Category}"
+                                           TextColor="#005596"
+                                           Margin="20, -30, 0, 0"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
                 <Button x:Name="btnSubmit" Text="Submit" Clicked="btnSubmit_Clicked" />
             </StackLayout>
         </ScrollView>

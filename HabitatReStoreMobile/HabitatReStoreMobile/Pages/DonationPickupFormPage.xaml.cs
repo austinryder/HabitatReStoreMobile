@@ -29,14 +29,15 @@ namespace HabitatReStoreMobile.Pages
         {
             InitializeComponent();
 
-            if (App.service.State == null)
+            if (App.service == null)
             {
                 App.InitializeService();
             }
 
-            InitializePickers();
-
             donor = d;
+
+            if (itemCategories == null)
+                InitializePickers();
         }
 
         private void btnSubmit_Clicked(object sender, EventArgs e)
@@ -60,7 +61,9 @@ namespace HabitatReStoreMobile.Pages
         {
             try
             {
-                App.service.InsertDonationCompleted += new EventHandler<InsertDonationCompletedEventArgs>(Service_InsertDonationCompleted);
+                //first removes handler so that this event can only be subscribed to once
+                App.service.InsertDonationCompleted -= Service_InsertDonationCompleted;
+                App.service.InsertDonationCompleted += Service_InsertDonationCompleted;
                 App.service.InsertDonationAsync(donation, item);
             }
             catch (Exception ex)
@@ -99,20 +102,15 @@ namespace HabitatReStoreMobile.Pages
 
             Device.BeginInvokeOnMainThread(() =>
             {
-                OnCompleted(success, message);
+                DependencyService.Get<IToast>().LongAlert(message);
+
+                btnSubmit.IsEnabled = true;
+
+                if (success)
+                {
+                    Navigation.PopToRootAsync();
+                }
             });
-        }
-
-        private void OnCompleted(bool success, string message)
-        {
-            DependencyService.Get<IToast>().LongAlert(message);
-
-            if (success)
-            {
-                Navigation.PopToRootAsync();
-            }
-
-            btnSubmit.IsEnabled = true;
         }
 
         private void GetItem()
@@ -122,6 +120,7 @@ namespace HabitatReStoreMobile.Pages
                 item.Donation_Image = bytearrayimage;
             }
 
+            item.Description = entDescription.Text;
             item.Item_Category_ID = itemCategories[pickItemCategory.SelectedIndex].Item_Category_ID;
         }
 
@@ -235,7 +234,9 @@ namespace HabitatReStoreMobile.Pages
             //get possible values for item category
             try
             {
-                App.service.GetItemCategoriesCompleted += new EventHandler<GetItemCategoriesCompletedEventArgs>(Service_GetItemCategoriesCompleted);
+                //first removes handler so that this event can only be subscribed to once
+                App.service.GetItemCategoriesCompleted -= Service_GetItemCategoriesCompleted;
+                App.service.GetItemCategoriesCompleted += Service_GetItemCategoriesCompleted;
                 App.service.GetItemCategoriesAsync();
             }
             catch (Exception ex)
@@ -246,7 +247,7 @@ namespace HabitatReStoreMobile.Pages
 
         private void Service_GetItemCategoriesCompleted(object sender, GetItemCategoriesCompletedEventArgs e)
         {
-            try
+            if (e.Error == null)
             {
                 itemCategories = e.Result;
                 pickItemCategory.Items.Clear();
@@ -256,9 +257,13 @@ namespace HabitatReStoreMobile.Pages
                 }
                 pickItemCategory.SelectedIndex = 0;
             }
-            catch (Exception ex)
+            else
             {
-                Debug.WriteLine(ex.InnerException);
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    DependencyService.Get<IToast>().ShortAlert("Unable to connect to server.");
+                });
+                Debug.WriteLine(e.Error);
             }
         }
 

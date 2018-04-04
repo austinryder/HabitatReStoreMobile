@@ -20,14 +20,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.1.5/HabitatWCFService/HabitatService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/HabitatWCFService/HabitatService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="HabitatService.disco" MetadataType="Disco" ID="65c7c1a5-2389-4238-b263-c12a053259f6" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?disco" />
-    <MetadataFile FileName="HabitatService.xsd" MetadataType="Schema" ID="852bf196-bae3-417f-a3e1-923f7e3eb10a" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd1" />
-    <MetadataFile FileName="HabitatService.wsdl" MetadataType="Wsdl" ID="1566b298-a232-4bc5-bd18-4bb0a0f8df9d" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?wsdl" />
-    <MetadataFile FileName="HabitatService1.xsd" MetadataType="Schema" ID="77a14fdd-893d-406e-8cea-6d34ed161be8" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd2" />
-    <MetadataFile FileName="HabitatService2.xsd" MetadataType="Schema" ID="655d931d-0994-4aac-b310-842915ccc85d" SourceId="1" SourceUrl="http://192.168.1.5/HabitatWCFService/HabitatService.svc?xsd=xsd0" />
+    <MetadataFile FileName="HabitatService3.xsd" MetadataType="Schema" ID="1d5ab4bf-8d88-43cb-9850-b0be6779d66d" SourceId="1" SourceUrl="http://localhost/HabitatWCFService/HabitatService.svc?xsd=xsd0" />
+    <MetadataFile FileName="HabitatService.xsd" MetadataType="Schema" ID="acdc7da9-26ea-4707-808d-519b41201b59" SourceId="1" SourceUrl="http://localhost/HabitatWCFService/HabitatService.svc?xsd=xsd3" />
+    <MetadataFile FileName="HabitatService1.wsdl" MetadataType="Wsdl" ID="515749ae-f731-4a42-9b62-448ecf16a831" SourceId="1" SourceUrl="http://localhost/HabitatWCFService/HabitatService.svc?wsdl" />
+    <MetadataFile FileName="HabitatService31.xsd" MetadataType="Schema" ID="c0171f7c-3881-452d-aaa8-e44cc60d6b8e" SourceId="1" SourceUrl="http://localhost/HabitatWCFService/HabitatService.svc?xsd=xsd1" />
+    <MetadataFile FileName="HabitatService32.xsd" MetadataType="Schema" ID="5fae81c3-cc85-4285-b5d6-b07ac493faad" SourceId="1" SourceUrl="http://localhost/HabitatWCFService/HabitatService.svc?xsd=xsd2" />
+    <MetadataFile FileName="HabitatService1.disco" MetadataType="Disco" ID="46fd309d-76ee-40f2-b4ad-b85ae8c867db" SourceId="1" SourceUrl="http://localhost/HabitatWCFService/HabitatService.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
