@@ -6,8 +6,9 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
+                <Label Text="Add Items to This Donation" StyleClass="PickerLabel" />
                 <Frame OutlineColor="#005596" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" Margin="20,10,20,0">
-                    <Image x:Name="imgDonationPhoto" Source="noimage.png" HorizontalOptions="Center" WidthRequest="340" HeightRequest="180" Margin="0, 0, 0, 0"/>
+                    <Image x:Name="imgDonationPhoto" Source="noimage.png" HorizontalOptions="Center" WidthRequest="240" HeightRequest="140" Margin="0, 0, 0, 0"/>
                 </Frame>
                 <StackLayout Orientation="Horizontal">
                     <Button x:Name="btnTakePhoto" Text="Take Photo" Margin="20, 5, 0, 10" FontSize="16" Clicked="btnTakePhoto_Clicked"/>
@@ -16,7 +17,37 @@
                 <!--Item Category Picker-->
                 <Label Text="Select Item Category:" StyleClass="PickerLabel"/>
                 <Picker x:Name="pickItemCategory"/>
-                <Entry x:Name="entDescription" Placeholder="Description"/>
+                <Entry x:Name="entDescription" Placeholder="Describe your item (Optional)"/>
+                <Button x:Name="btnAddItem" Text="Add Item" Clicked="btnAddItem_Clicked" />
+                <Label Text="Items Included in this Donation:" StyleClass="PickerLabel"/>
+                <ListView x:Name="itemsList" Margin="20, 0, 20, 0" IsEnabled="False" HeightRequest="50" RowHeight="50">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!--Items List-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame OutlineColor="#005596" Margin="5,5,5,5" Padding="0,0,0,0">
+                                        <Image x:Name="imgItem"
+                                           Source="{Binding ItemImage}"
+                                           HeightRequest="40"
+                                           WidthRequest="80"
+                                           HorizontalOptions="Start"/>
+                                    </Frame>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding Description}"
+                                           TextColor="#005596"
+                                           FontSize="16"
+                                           VerticalOptions="Start"/>
+                                        <Label Text="{Binding Category}"
+                                           TextColor="#005596"
+                                           FontSize="12"
+                                           VerticalOptions="Start"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
                 <!--Switch to use Donor Address-->
                 <StackLayout Orientation="Horizontal">
                     <Switch x:Name="swUseDonorAddress" Toggled="swUseDonorAddress_Toggled" IsToggled="False" Margin="20, 0, 0, 0"/>
@@ -24,7 +55,7 @@
                 </StackLayout>
                 <Entry x:Name="entAddress" Placeholder="Address" />
                 <Label x:Name="lblVAddress" StyleClass="Validation"/>
-                <Entry x:Name="entAddress2" Placeholder="Address2"/>
+                <Entry x:Name="entAddress2" Placeholder="Address2 (Optional)"/>
                 <Label x:Name="lblVAddress2" StyleClass="Validation"/>
                 <Entry x:Name="entCity" Placeholder="City"/>
                 <Label x:Name="lblVCity" StyleClass="Validation"/>
@@ -33,6 +64,28 @@
                 <Picker x:Name="pickState"/>
                 <Entry x:Name="entZIP" Placeholder="ZIP Code"/>
                 <Label x:Name="lblVZIP" StyleClass="Validation"/>
+                <!-- Pickup Window-->
+                <Label Text="Pickup Day:" StyleClass="PickerLabel"/>
+                <DatePicker x:Name="pickDay" VerticalOptions="CenterAndExpand">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                </DatePicker>
+                <Label Text="Pickup Window:" StyleClass="PickerLabel"/>
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Start:" StyleClass="PickerLabel" FontSize="12"/>
+                        <TimePicker x:Name="pickTimeStart" TextColor="#005596" VerticalOptions="CenterAndExpand" Margin="20,0,20,0">
+                        </TimePicker>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="End:" StyleClass="PickerLabel" FontSize="12"/>
+                        <TimePicker x:Name="pickTimeEnd" TextColor="#005596" VerticalOptions="CenterAndExpand" Margin="20,0,20,0">
+                        </TimePicker>
+                    </StackLayout>
+                </StackLayout>
+                <Label x:Name="lblVTimeWindow" StyleClass="Validation"/>
+                <Label Text="Special Instructions (Optional)" StyleClass="PickerLabel"/> 
+                <Editor x:Name="edtSpecialInstructions" VerticalOptions="CenterAndExpand" HeightRequest="100"
+                        Margin="20,0,20,0" TextColor="#005596"/>
                 <Button x:Name="btnSubmit" Text="Submit" Clicked="btnSubmit_Clicked" />
             </StackLayout>
         </ScrollView>

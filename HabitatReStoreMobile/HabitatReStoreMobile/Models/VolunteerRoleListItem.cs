@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HabitatReStoreMobile.Models
 {
-    class VolunteerRoleItem
+    class VolunteerRoleListItem
     {
         public string Category { get; set; }
         public int Category_ID { get; set; }

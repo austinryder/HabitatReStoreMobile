@@ -105,17 +105,8 @@ namespace HabitatReStoreMobile.Pages
 
             if (e.Error == null)
             {
-                int result = e.Result;
-                if (result == 1)
-                {
-                    success = true;
-                    message = "Donor form successfully submitted";
-                }
-                else
-                {
-                    success = false;
-                    message = "Error submitting donor form.";
-                }
+                success = true;
+                message = "Donor form successfully submitted";
             }
             else
             {
@@ -199,17 +190,14 @@ namespace HabitatReStoreMobile.Pages
 
         private void InitializePickers()
         {
-            List<string> contactMethods = new List<string> { "Email", "Phone" };
             List<string> genderOptions = new List<string> { "M", "F", "Other" };
             List<string> stateOptions = new List<string> { "AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY" };
 
             pickGender.ItemsSource = genderOptions;
             pickState.ItemsSource = stateOptions;
-            pickContactMethod.ItemsSource = contactMethods;
 
             pickGender.SelectedIndex = 0;
             pickState.SelectedItem = "NC";
-            pickContactMethod.SelectedIndex = 0;
         }
     }
 }

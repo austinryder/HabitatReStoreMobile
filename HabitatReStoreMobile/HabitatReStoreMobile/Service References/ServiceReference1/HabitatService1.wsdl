@@ -26,11 +26,17 @@
   <wsdl:message name="IHabitatService_InsertDonation_OutputMessage">
     <wsdl:part name="parameters" element="tns:InsertDonationResponse" />
   </wsdl:message>
-  <wsdl:message name="IHabitatService_GetItemsWithImageAndDescription_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetItemsWithImageAndDescription" />
+  <wsdl:message name="IHabitatService_InsertItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertItem" />
   </wsdl:message>
-  <wsdl:message name="IHabitatService_GetItemsWithImageAndDescription_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetItemsWithImageAndDescriptionResponse" />
+  <wsdl:message name="IHabitatService_InsertItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetItemWithImageAndDescription_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemWithImageAndDescription" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetItemWithImageAndDescription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemWithImageAndDescriptionResponse" />
   </wsdl:message>
   <wsdl:message name="IHabitatService_GetDonorFromEmail_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDonorFromEmail" />
@@ -50,6 +56,24 @@
   <wsdl:message name="IHabitatService_GetVolunteerCategories_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetVolunteerCategoriesResponse" />
   </wsdl:message>
+  <wsdl:message name="IHabitatService_GetDriverFromIDAndEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDriverFromIDAndEmail" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetDriverFromIDAndEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDriverFromIDAndEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetDonationAndPickupFromID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDonationAndPickupFromID" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_GetDonationAndPickupFromID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDonationAndPickupFromIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_UpdateCompletedDonationPickup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompletedDonationPickup" />
+  </wsdl:message>
+  <wsdl:message name="IHabitatService_UpdateCompletedDonationPickup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompletedDonationPickupResponse" />
+  </wsdl:message>
   <wsdl:portType name="IHabitatService">
     <wsdl:operation name="InsertVolunteer">
       <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/InsertVolunteer" message="tns:IHabitatService_InsertVolunteer_InputMessage" />
@@ -63,9 +87,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/InsertDonation" message="tns:IHabitatService_InsertDonation_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/InsertDonationResponse" message="tns:IHabitatService_InsertDonation_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetItemsWithImageAndDescription">
-      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetItemsWithImageAndDescription" message="tns:IHabitatService_GetItemsWithImageAndDescription_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetItemsWithImageAndDescriptionResponse" message="tns:IHabitatService_GetItemsWithImageAndDescription_OutputMessage" />
+    <wsdl:operation name="InsertItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/InsertItem" message="tns:IHabitatService_InsertItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/InsertItemResponse" message="tns:IHabitatService_InsertItem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemWithImageAndDescription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetItemWithImageAndDescription" message="tns:IHabitatService_GetItemWithImageAndDescription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetItemWithImageAndDescriptionResponse" message="tns:IHabitatService_GetItemWithImageAndDescription_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetDonorFromEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetDonorFromEmail" message="tns:IHabitatService_GetDonorFromEmail_InputMessage" />
@@ -78,6 +106,18 @@
     <wsdl:operation name="GetVolunteerCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetVolunteerCategories" message="tns:IHabitatService_GetVolunteerCategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetVolunteerCategoriesResponse" message="tns:IHabitatService_GetVolunteerCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDriverFromIDAndEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetDriverFromIDAndEmail" message="tns:IHabitatService_GetDriverFromIDAndEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetDriverFromIDAndEmailResponse" message="tns:IHabitatService_GetDriverFromIDAndEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDonationAndPickupFromID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/GetDonationAndPickupFromID" message="tns:IHabitatService_GetDonationAndPickupFromID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/GetDonationAndPickupFromIDResponse" message="tns:IHabitatService_GetDonationAndPickupFromID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompletedDonationPickup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHabitatService/UpdateCompletedDonationPickup" message="tns:IHabitatService_UpdateCompletedDonationPickup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHabitatService/UpdateCompletedDonationPickupResponse" message="tns:IHabitatService_UpdateCompletedDonationPickup_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IHabitatService" type="tns:IHabitatService">
@@ -109,8 +149,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetItemsWithImageAndDescription">
-      <soap:operation soapAction="http://tempuri.org/IHabitatService/GetItemsWithImageAndDescription" style="document" />
+    <wsdl:operation name="InsertItem">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/InsertItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemWithImageAndDescription">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/GetItemWithImageAndDescription" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -138,6 +187,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetVolunteerCategories">
       <soap:operation soapAction="http://tempuri.org/IHabitatService/GetVolunteerCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDriverFromIDAndEmail">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/GetDriverFromIDAndEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDonationAndPickupFromID">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/GetDonationAndPickupFromID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompletedDonationPickup">
+      <soap:operation soapAction="http://tempuri.org/IHabitatService/UpdateCompletedDonationPickup" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

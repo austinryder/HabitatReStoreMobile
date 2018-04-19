@@ -29,9 +29,6 @@
                 <Label x:Name="lblVEmail" StyleClass="Validation"/>
                 <Entry x:Name="entPhone" Placeholder="Phone"/>
                 <Label x:Name="lblVPhone" StyleClass="Validation"/>
-                <!--Contact Method Picker-->
-                <Label Text="Preferred Method of Contact:" StyleClass="PickerLabel"/>
-                <Picker x:Name="pickContactMethod"/>
                 <Button x:Name="btnSubmit" Text="Submit" Clicked="btnSubmit_Clicked" />
             </StackLayout>
         </ScrollView>

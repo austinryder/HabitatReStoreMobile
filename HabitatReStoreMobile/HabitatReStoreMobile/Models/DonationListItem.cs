@@ -7,8 +7,9 @@ using Xamarin.Forms;
 
 namespace HabitatReStoreMobile.Models
 {
-    public class DonationItem
+    public class DonationListItem
     {
+        public string Category { get; set; }
         public string Description { get; set; }
         public ImageSource ItemImage { get; set; }
     }

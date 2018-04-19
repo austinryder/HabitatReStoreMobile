@@ -4,32 +4,36 @@
              x:Class="HabitatReStoreMobile.Pages.RecentItemsPage"
              Title="Recent Items">
     <ContentPage.Content>
-        <ScrollView>
-            <ListView x:Name="itemsList" IsEnabled="False" RowHeight="100" VerticalOptions="FillAndExpand"
+
+        <ScrollView x:Name="scrollView">
+            <StackLayout>
+                <ListView x:Name="itemsList" IsEnabled="False" RowHeight="100" VerticalOptions="FillAndExpand"
                       HorizontalOptions="FillAndExpand" Margin="0,0,0,0">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <!--Items-->
-                            <StackLayout Orientation="Horizontal">
-                                <Frame OutlineColor="#005596" CornerRadius="5"
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!--Items-->
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame OutlineColor="#005596" CornerRadius="5"
                                        Margin="5,5,5,5" Padding="5,5,5,5">
-                                    <Image x:Name="imgItem"
+                                        <Image x:Name="imgItem"
                                            Source="{Binding ItemImage}"
                                            HeightRequest="80"
-                                           WidthRequest="160"
+                                           WidthRequest="140"
                                            HorizontalOptions="Start"/>
-                                </Frame>
+                                    </Frame>
 
-                                <Label Text="{Binding Description}"
+                                    <Label Text="{Binding Description}"
                                            TextColor="#005596"
                                            FontSize="18"
                                            VerticalOptions="Center"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="btnLoadMore" Text="Load More Items" Clicked="btnLoadMore_Clicked"/>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

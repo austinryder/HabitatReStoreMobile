@@ -19,7 +19,7 @@ namespace HabitatReStoreMobile.Pages
     public partial class VolunteerFormPage : ContentPage
     {
         ObservableCollection<VolunteerCategory> volunteerCategories = new ObservableCollection<VolunteerCategory>();
-        List<VolunteerRoleItem> volunteerRoleItems = new List<VolunteerRoleItem>();
+        List<VolunteerRoleListItem> volunteerRoleItems = new List<VolunteerRoleListItem>();
 
         public VolunteerFormPage()
         {
@@ -49,7 +49,7 @@ namespace HabitatReStoreMobile.Pages
         private VolunteerInfo GetVolunteer()
         {
             string fName, lName, mName, email, phone, ssn, city, zip, address, address2;
-            string state, role, contactMethod;
+            string state, role;
             char gender;
             DateTime dob;
             ObservableCollection<int> roleIDs = new ObservableCollection<int>();
@@ -67,10 +67,9 @@ namespace HabitatReStoreMobile.Pages
             address2 = entAddress2.Text;
             gender = pickGender.SelectedItem.ToString()[0];
             state = pickState.SelectedItem.ToString();
-            contactMethod = pickContactMethod.SelectedItem.ToString();
 
             //get selected roles
-            foreach (VolunteerRoleItem vc in rolePickerList.ItemsSource)
+            foreach (VolunteerRoleListItem vc in rolePickerList.ItemsSource)
             {
                 if (vc.Selected)
                 {
@@ -258,17 +257,8 @@ namespace HabitatReStoreMobile.Pages
 
             if (e.Error == null)
             {
-                int result = e.Result;
-                if (result == 1)
-                {
-                    success = true;
-                    message = "Volunteer form successfully submitted";
-                }
-                else
-                {
-                    success = false;
-                    message = "Error submitting volunteer form.";
-                }
+                success = true;
+                message = "Volunteer form successfully submitted";
             }
             else
             {
@@ -292,17 +282,14 @@ namespace HabitatReStoreMobile.Pages
 
         private void InitializePickers()
         {
-            List<string> contactMethods = new List<string> { "Email", "Phone" };
             List<string> genderOptions = new List<string> { "M", "F", "Other" };
             List<string> stateOptions = new List<string> { "AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY" };
 
             pickGender.ItemsSource = genderOptions;
             pickState.ItemsSource = stateOptions;
-            pickContactMethod.ItemsSource = contactMethods;
 
             pickGender.SelectedIndex = 0;
             pickState.SelectedItem = "NC";
-            pickContactMethod.SelectedIndex = 0;
 
             pickDOB.Date = DateTime.Today;
 
@@ -328,7 +315,7 @@ namespace HabitatReStoreMobile.Pages
 
                 foreach (VolunteerCategory vc in volunteerCategories)
                 {
-                    volunteerRoleItems.Add(new VolunteerRoleItem()
+                    volunteerRoleItems.Add(new VolunteerRoleListItem()
                     {
                         Category = vc.Description,
                         Category_ID = vc.Volunteer_Category_ID,
@@ -355,11 +342,6 @@ namespace HabitatReStoreMobile.Pages
         private void rolePickerList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             rolePickerList.SelectedItem = null;
-        }
-
-        private void swRole_Toggled(object sender, ToggledEventArgs e)
-        {
-            
         }
     }
 }

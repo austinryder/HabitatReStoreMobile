@@ -9,12 +9,6 @@
             <Style TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="White"/>
             </Style>
-            <!--Style TargetType="Label">
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="VerticalOptions" Value="Start" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="FontSize" Value="36" />
-            </-->
             <Style TargetType="Entry">
                 <Setter Property="HorizontalOptions" Value="Fill" />
                 <Setter Property="VerticalOptions" Value="Start" />
@@ -50,8 +44,16 @@
             <Style Class="PickerLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="#005596" />
                 <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalOptions" Value="Start" />
                 <Setter Property="Margin" Value="20, 5, 0, 0" />
+            </Style>
+            <Style Class="DisplayLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="Margin" Value="25, 5, 0, 0" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="#005596" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

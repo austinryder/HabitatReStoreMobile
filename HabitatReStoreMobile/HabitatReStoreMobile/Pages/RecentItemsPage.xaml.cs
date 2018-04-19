@@ -19,7 +19,11 @@ namespace HabitatReStoreMobile.Pages
     public partial class RecentItemsPage : ContentPage
     {
         ObservableCollection<ItemInfo> items = new ObservableCollection<ItemInfo>();
-        List<DonationItem> listItems = new List<DonationItem>();
+        ObservableCollection<DonationListItem> listItems = new ObservableCollection<DonationListItem>();
+        bool prevCompleted = true;
+        bool abort = false;
+        int index = 1;
+        int count = 0;
 
         public RecentItemsPage()
         {
@@ -29,55 +33,102 @@ namespace HabitatReStoreMobile.Pages
             {
                 App.InitializeService();
             }
-
-            PopulateListView();
         }
 
-        private void PopulateListView()
+        protected override async void OnAppearing()
         {
-            DependencyService.Get<IToast>().ShortAlert("Loading...");
+            itemsList.ItemsSource = listItems;
 
+            btnLoadMore.IsEnabled = false;
+            await Task.Run(() => LoadMoreItems(5));
+            btnLoadMore.IsEnabled = true;
+        }
+
+        private void LoadMoreItems(int number)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                DependencyService.Get<IToast>().LongAlert("Loading...");
+            });
+
+            count += number;
+
+            //gets last count items
+            while (index < count && !abort)
+            {
+                if (prevCompleted)
+                {
+                    prevCompleted = false;
+                    PopulateListView(index);
+                    index++;
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        scrollView.ScrollToAsync(0, itemsList.Height + 50, true);
+                    });
+                }
+            }
+        }
+
+        private void PopulateListView(int index)
+        {
             try
             {
                 //first removes handler so that this event can only be subscribed to once
-                App.service.GetItemsWithImageAndDescriptionCompleted -= Service_GetItemsWithImageAndDescriptionCompleted;
-                App.service.GetItemsWithImageAndDescriptionCompleted += Service_GetItemsWithImageAndDescriptionCompleted;
-                App.service.GetItemsWithImageAndDescriptionAsync();
+                App.service.GetItemWithImageAndDescriptionCompleted -= Service_GetItemWithImageAndDescriptionCompleted;
+                App.service.GetItemWithImageAndDescriptionCompleted += Service_GetItemWithImageAndDescriptionCompleted;
+                App.service.GetItemWithImageAndDescriptionAsync(index);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                abort = true;
             }
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                //itemsList.ItemsSource = null;
+                //itemsList.ItemsSource = listItems;
+
+                itemsList.HeightRequest = 100 * listItems.Count;
+            });
         }
 
-        private void Service_GetItemsWithImageAndDescriptionCompleted(object sender, GetItemsWithImageAndDescriptionCompletedEventArgs e)
+        private void Service_GetItemWithImageAndDescriptionCompleted(object sender, GetItemWithImageAndDescriptionCompletedEventArgs e)
         {
             if (e.Error == null)
             {
-                items = e.Result;
-
-                foreach (ItemInfo i in items)
+                ItemInfo item = e.Result;
+                if (item.Description != null)
                 {
-                    listItems.Add(new DonationItem()
+                    items.Add(item);
+
+                    listItems.Add(new DonationListItem()
                     {
-                        Description = i.Description,
-                        ItemImage = ConvertToImageSource(i.Donation_Image)
+                        Description = item.Description,
+                        ItemImage = ConvertToImageSource(item.Donation_Image)
                     });
                 }
-
-                Device.BeginInvokeOnMainThread(() =>
+                else
                 {
-                    itemsList.ItemsSource = listItems;
-                });
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        abort = true;
+                        DependencyService.Get<IToast>().ShortAlert("No more items.");
+                    });
+                }
             }
             else
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
+                    abort = true;
                     DependencyService.Get<IToast>().ShortAlert("Unable to connect to server.");
                 });
                 Debug.WriteLine(e.Error);
             }
+
+            prevCompleted = true;
         }
 
         private ImageSource ConvertToImageSource(byte[] byteImage)
@@ -85,6 +136,13 @@ namespace HabitatReStoreMobile.Pages
             ImageSource source = ImageSource.FromStream(() => new MemoryStream(byteImage));
 
             return source;
+        }
+
+        private async void btnLoadMore_Clicked(object sender, EventArgs e)
+        {
+            btnLoadMore.IsEnabled = false;
+            await Task.Run(() => LoadMoreItems(5));
+            btnLoadMore.IsEnabled = true;
         }
     }
 }

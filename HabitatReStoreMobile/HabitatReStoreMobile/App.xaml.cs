@@ -11,7 +11,7 @@ namespace HabitatReStoreMobile
 {
     public partial class App : Application
     {
-        public static EndpointAddress SERVICEADDRESS = new EndpointAddress("http://639991bf.ngrok.io/HabitatWCFService/HabitatService.svc");
+        public static EndpointAddress SERVICEADDRESS = new EndpointAddress("http://f7878300.ngrok.io/HabitatWCFService/HabitatService.svc");
         public static HabitatServiceClient service;
         public App()
         {
@@ -25,10 +25,10 @@ namespace HabitatReStoreMobile
             BasicHttpBinding binding = new BasicHttpBinding
             {
                 Name = "basicHttpBinding",
-                MaxBufferSize = 2147483647,
-                MaxReceivedMessageSize = 2147483647
+                MaxBufferSize = Int32.MaxValue,
+                MaxReceivedMessageSize = Int32.MaxValue
             };
-            TimeSpan timeout = new TimeSpan(0, 0, 30);
+            TimeSpan timeout = new TimeSpan(0, 1, 0);
             binding.SendTimeout = timeout;
             binding.OpenTimeout = timeout;
             binding.ReceiveTimeout = timeout;

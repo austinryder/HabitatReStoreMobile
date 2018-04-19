@@ -188,6 +188,7 @@
     <BundleResource Include="Resources\icDonate.png" />
     <BundleResource Include="Resources\icFind.png" />
     <BundleResource Include="Resources\icHome.png" />
+    <BundleResource Include="Resources\icDriver.png" />
     <Content Include="Resources\icon.png" />
     <BundleResource Include="Resources\imgEmployees.jpg" />
     <BundleResource Include="Resources\imgReStoreBlack.png" />

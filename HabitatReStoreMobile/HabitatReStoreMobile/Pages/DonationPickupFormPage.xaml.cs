@@ -1,6 +1,7 @@
 ﻿using HabitatReStoreMobile.Interfaces;
 using HabitatReStoreMobile.Models;
 using HabitatReStoreMobile.ServiceReference1;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,10 +21,15 @@ namespace HabitatReStoreMobile.Pages
     public partial class DonationPickupFormPage : ContentPage
     {
         ObservableCollection<ItemCategory> itemCategories;
+        List<DonationListItem> listItems = new List<DonationListItem>();
+        ObservableCollection<ItemInfo> items = new ObservableCollection<ItemInfo>();
         byte[] bytearrayimage;
         DonorInfo donor;
-        ItemInfo item;
-        DonationInfo donation;
+        int donationID;
+        bool abort = false;
+        bool success = false;
+        bool prevCompleted;
+        string message = "";
 
         public DonationPickupFormPage(DonorInfo d)
         {
@@ -40,31 +46,54 @@ namespace HabitatReStoreMobile.Pages
                 InitializePickers();
         }
 
+        private void btnAddItem_Clicked(object sender, EventArgs e)
+        {
+            ItemInfo newItem = new ItemInfo();
+            newItem = GetItem();
+            items.Add(newItem);
+
+            listItems.Add(new DonationListItem()
+            {
+                Category = pickItemCategory.SelectedItem.ToString(),
+                Description = newItem.Description,
+                ItemImage = imgDonationPhoto.Source
+            });
+
+            //reset item source - solves issue with only displaying first item
+            itemsList.ItemsSource = null;
+            itemsList.ItemsSource = listItems;
+            itemsList.HeightRequest = (60 * listItems.Count);
+
+            //clear items entries for next item
+            imgDonationPhoto.Source = "noimage.png";
+            entDescription.Text = "";
+            pickItemCategory.SelectedIndex = 0;
+        }
+
         private void btnSubmit_Clicked(object sender, EventArgs e)
         {
-            item = new ItemInfo();
-            donation = new DonationInfo();
+            DonationInfo donation = GetDonation();
+            DonationPickupInfo pickupInfo = GetPickupInfo();
 
-            GetItem();
-            GetDonation();
-
-            if (ValidateAll(donation))
+            if (ValidateAll(donation, pickupInfo))
             {
                 btnSubmit.IsEnabled = false;
                 DependencyService.Get<IToast>().ShortAlert("Submitting... please wait.");
 
-                InsertDonationToDatabase(donation, item);
+                InsertDonationToDatabase(donation, items, pickupInfo);
+
+                InsertItems(items);
             }
         }
 
-        private void InsertDonationToDatabase(DonationInfo donation, ItemInfo item)
+        private void InsertDonationToDatabase(DonationInfo donation, ObservableCollection<ItemInfo> items, DonationPickupInfo pickupInfo)
         {
             try
             {
                 //first removes handler so that this event can only be subscribed to once
                 App.service.InsertDonationCompleted -= Service_InsertDonationCompleted;
                 App.service.InsertDonationCompleted += Service_InsertDonationCompleted;
-                App.service.InsertDonationAsync(donation, item);
+                App.service.InsertDonationAsync(donation, pickupInfo);
             }
             catch (Exception ex)
             {
@@ -76,56 +105,100 @@ namespace HabitatReStoreMobile.Pages
 
         private void Service_InsertDonationCompleted(object sender, InsertDonationCompletedEventArgs e)
         {
-            bool success = false;
-            string message = "";
-
             if (e.Error == null)
             {
-                int result = e.Result;
-                if (result == 1)
-                {
-                    success = true;
-                    message = "Donation pickup form successfully submitted.";
-                }
-                else
-                {
-                    success = false;
-                    message = "Error submitting donation pickup form.";
-                }
+                prevCompleted = true;
+                donationID = e.Result;
+                success = true;
+                message = "Donation pickup form successfully submitted.";
             }
             else
             {
+                abort = true;
+                success = false;
+                message = "Error submitting donation pickup form.";
+                
+                Debug.WriteLine(e.Error);
+            }
+        }
+
+        private void InsertItems(ObservableCollection<ItemInfo> items)
+        {
+            try
+            {
+                //first removes handler so that this event can only be subscribed to once
+                App.service.InsertItemCompleted -= Service_InsertItemCompleted;
+                App.service.InsertItemCompleted += Service_InsertItemCompleted;
+
+                int counter = 0;
+
+                //must loop to wait for other inserts to complete, if error occurs, aborts.
+                while (counter < items.Count && !abort)
+                {
+                    if (prevCompleted)
+                    {
+                        prevCompleted = false;
+                        App.service.InsertItemAsync(items[counter], donationID);
+                        counter++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<IToast>().LongAlert("Error, unable to access server.");
+                btnSubmit.IsEnabled = true;
+                Debug.WriteLine(ex);
+            }
+
+            DependencyService.Get<IToast>().LongAlert(message);
+
+            if (success)
+            {
+                Navigation.PopToRootAsync();
+            }
+        }
+
+        private void Service_InsertItemCompleted(object sender, InsertItemCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                success = true;
+                prevCompleted = true;
+                message = "Donation pickup form successfully submitted";
+            }
+            else
+            {
+                abort = true;
                 success = false;
                 message = "Error submitting donation pickup form.";
                 Debug.WriteLine(e.Error);
-            }
 
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                DependencyService.Get<IToast>().LongAlert(message);
-
-                btnSubmit.IsEnabled = true;
-
-                if (success)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    Navigation.PopToRootAsync();
-                }
-            });
+                    edtSpecialInstructions.Text = e.Error.ToString();
+                });
+            }
         }
 
-        private void GetItem()
+        private ItemInfo GetItem()
         {
-            if(bytearrayimage != null)
+            ItemInfo newItem = new ItemInfo();
+
+            if (bytearrayimage != null)
             {
-                item.Donation_Image = bytearrayimage;
+                newItem.Donation_Image = bytearrayimage;
             }
 
-            item.Description = entDescription.Text;
-            item.Item_Category_ID = itemCategories[pickItemCategory.SelectedIndex].Item_Category_ID;
+            newItem.Description = entDescription.Text;
+            newItem.Item_Category_ID = itemCategories[pickItemCategory.SelectedIndex].Item_Category_ID;
+
+            return newItem;
         }
 
-        private void GetDonation()
+        private DonationInfo GetDonation()
         {
+            DonationInfo donation = new DonationInfo();
+
             donation.Donor_ID = donor.Donor_ID;
             donation.Address = entAddress.Text;
             donation.Address2 = entAddress2.Text;
@@ -135,6 +208,27 @@ namespace HabitatReStoreMobile.Pages
             donation.Store_ID = GetStoreByZIP();
             donation.Status_Map_ID = 3;
             donation.Bypass_Flag = false;
+
+            return donation;
+        }
+
+        private DonationPickupInfo GetPickupInfo()
+        {
+            DonationPickupInfo pickupInfo = new DonationPickupInfo();
+
+            DateTime day = new DateTime();
+            DateTime windowStart = new DateTime();
+            DateTime windowEnd = new DateTime();
+
+            day = pickDay.Date.Date;
+            windowStart = day + pickTimeStart.Time;
+            windowEnd = day + pickTimeEnd.Time;
+
+            pickupInfo.PickupWindowStart = windowStart;
+            pickupInfo.PickupWindowEnd = windowEnd;
+            pickupInfo.SpecialInstructions = edtSpecialInstructions.Text;
+
+            return pickupInfo;
         }
 
         //TO-DO: GET CORRECT STORE BY ZIPCODE
@@ -142,7 +236,8 @@ namespace HabitatReStoreMobile.Pages
         {
             return 1;
         }
-        private bool ValidateAll(DonationInfo newDonation)
+
+        private bool ValidateAll(DonationInfo newDonation, DonationPickupInfo newPickUp)
         {
             bool valid = true;
 
@@ -173,9 +268,24 @@ namespace HabitatReStoreMobile.Pages
                 lblVZIP.Text = "";
             }
 
+            //check pickup times
+            if (newPickUp.PickupWindowStart > newPickUp.PickupWindowEnd)
+            {
+                lblVTimeWindow.Text = "Pickup window start must be before end";
+                valid = false;
+            }
+            else if (newPickUp.PickupWindowStart.Date <= DateTime.Today)
+            {
+                lblVTimeWindow.Text = "Pickup must be a date in the future";
+                valid = false;
+            }
+            else
+            {
+                lblVTimeWindow.Text = "";
+            }
+
             return valid;
         }
-
 
         //Open camera and take photo
         private async void btnTakePhoto_Clicked(object sender, EventArgs e)
@@ -188,8 +298,8 @@ namespace HabitatReStoreMobile.Pages
             {
                 var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
                 {
-                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
-                    CompressionQuality = 50,
+                    PhotoSize = PhotoSize.Small,
+                    CompressionQuality = 30,
                     SaveToAlbum = true
                 });
 
@@ -206,8 +316,8 @@ namespace HabitatReStoreMobile.Pages
         {
             var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions()
             {
-                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
-                CompressionQuality = 50
+                PhotoSize = PhotoSize.Small,
+                CompressionQuality = 30
             });
 
             if (photo != null)

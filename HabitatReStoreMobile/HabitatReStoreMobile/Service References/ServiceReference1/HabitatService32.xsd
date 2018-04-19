@@ -47,6 +47,7 @@
       <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Bypass_Flag" type="xs:boolean" />
       <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Donation_ID" type="xs:int" />
       <xs:element minOccurs="0" name="Donor_ID" type="xs:int" />
       <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Status_Map_ID" type="xs:int" />
@@ -55,6 +56,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DonationInfo" nillable="true" type="tns:DonationInfo" />
+  <xs:complexType name="DonationPickupInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Completed" type="xs:int" />
+      <xs:element minOccurs="0" name="DonationID" type="xs:int" />
+      <xs:element minOccurs="0" name="PickupWindowEnd" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PickupWindowStart" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SpecialInstructions" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DonationPickupInfo" nillable="true" type="tns:DonationPickupInfo" />
   <xs:complexType name="ItemInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
@@ -65,12 +76,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ItemInfo" nillable="true" type="tns:ItemInfo" />
-  <xs:complexType name="ArrayOfItemInfo">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemInfo" nillable="true" type="tns:ItemInfo" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfItemInfo" nillable="true" type="tns:ArrayOfItemInfo" />
   <xs:complexType name="ArrayOfItemCategory">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemCategory" nillable="true" type="tns:ItemCategory" />
@@ -97,4 +102,30 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="VolunteerCategory" nillable="true" type="tns:VolunteerCategory" />
+  <xs:complexType name="DriverInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Driver_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="First_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gender" type="ser:char" />
+      <xs:element minOccurs="0" name="Last_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Middle_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SSN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status_Map_ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DriverInfo" nillable="true" type="tns:DriverInfo" />
+  <xs:complexType name="DonationAndPickup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Donation" nillable="true" type="tns:DonationInfo" />
+      <xs:element minOccurs="0" name="Pickup" nillable="true" type="tns:DonationPickupInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DonationAndPickup" nillable="true" type="tns:DonationAndPickup" />
 </xs:schema>

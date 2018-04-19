@@ -33,7 +33,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="donationInfo" nillable="true" type="q3:DonationInfo" />
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="itemInfo" nillable="true" type="q4:ItemInfo" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="pickupInfo" nillable="true" type="q4:DonationPickupInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -44,15 +44,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetItemsWithImageAndDescription">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetItemsWithImageAndDescriptionResponse">
+  <xs:element name="InsertItem">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetItemsWithImageAndDescriptionResult" nillable="true" type="q5:ArrayOfItemInfo" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="itemInfo" nillable="true" type="q5:ItemInfo" />
+        <xs:element minOccurs="0" name="donationID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertItemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertItemResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemWithImageAndDescription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="index" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemWithImageAndDescriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetItemWithImageAndDescriptionResult" nillable="true" type="q6:ItemInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -66,7 +83,7 @@
   <xs:element name="GetDonorFromEmailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetDonorFromEmailResult" nillable="true" type="q6:DonorInfo" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetDonorFromEmailResult" nillable="true" type="q7:DonorInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -78,7 +95,7 @@
   <xs:element name="GetItemCategoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetItemCategoriesResult" nillable="true" type="q7:ArrayOfItemCategory" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetItemCategoriesResult" nillable="true" type="q8:ArrayOfItemCategory" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -90,7 +107,52 @@
   <xs:element name="GetVolunteerCategoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetVolunteerCategoriesResult" nillable="true" type="q8:ArrayOfVolunteerCategory" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetVolunteerCategoriesResult" nillable="true" type="q9:ArrayOfVolunteerCategory" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDriverFromIDAndEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="driverID" type="xs:int" />
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDriverFromIDAndEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetDriverFromIDAndEmailResult" nillable="true" type="q10:DriverInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDonationAndPickupFromID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="donationID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDonationAndPickupFromIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="GetDonationAndPickupFromIDResult" nillable="true" type="q11:DonationAndPickup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateCompletedDonationPickup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="donation" nillable="true" type="q12:DonationInfo" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/HabitatWCFService" minOccurs="0" name="pickup" nillable="true" type="q13:DonationPickupInfo" />
+        <xs:element minOccurs="0" name="completedTime" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateCompletedDonationPickupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateCompletedDonationPickupResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

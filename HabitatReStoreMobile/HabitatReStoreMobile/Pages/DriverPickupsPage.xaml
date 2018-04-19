@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HabitatReStoreMobile.Pages.DriverPickupsPage"
+             Title="Driver Pickups">
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout>
+            <Label x:Name="lblDriver" Margin="20,5,20,5" Text="Donate" FontSize="20"
+                   FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Label Text="Enter Donation ID's from Daily Pickups Sheet" StyleClass="PickerLabel"/>
+            <StackLayout Orientation="Horizontal">
+                <Entry x:Name="entDonationID" Keyboard="Numeric" Placeholder="Donation ID" WidthRequest="180" Margin="20,5,0,5"/>
+                <Button x:Name="btnEnter" Text="Enter" Clicked="btnEnter_Clicked" WidthRequest="100"/>
+            </StackLayout>
+                <ListView x:Name="pickupsList" Margin="20, 0, 20, 0" RowHeight="450">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!--Pickups List-->
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding DonationNumber}" StyleClass="PickerLabel" FontSize="18"/>
+                                    
+                                    <!-- Grid Displaying Pickup Info-->
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <!-- left side-->
+                                        <Label Text="ID" StyleClass="PickerLabel" Grid.Row="0" Grid.Column="0"/>
+                                        <Label Text="{Binding DonationID}" StyleClass="DisplayLabel" Grid.Row="1" Grid.Column="0"/>
+                                        <Label Text="Date" StyleClass="PickerLabel" Grid.Row="2" Grid.Column="0"/>
+                                        <Label Text="{Binding Date}" StyleClass="DisplayLabel" Grid.Row="3" Grid.Column="0" />
+                                        <Label Text="Start" StyleClass="PickerLabel" Grid.Row="4" Grid.Column="0"/>
+                                        <Label Text="{Binding PickupStart}" StyleClass="DisplayLabel" Grid.Row="5" Grid.Column="0"/>
+                                        <Label Text="End" StyleClass="PickerLabel" Grid.Row="6" Grid.Column="0"/>
+                                        <Label Text="{Binding PickupEnd}" StyleClass="DisplayLabel" Grid.Row="7" Grid.Column="0"/>
+                                        <!-- right side -->
+                                        <Label Text="Address" StyleClass="PickerLabel" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                        <Label Text="{Binding Address}" StyleClass="DisplayLabel" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                        <Label Text="Address 2" StyleClass="PickerLabel" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                        <Label Text="{Binding Address2}" StyleClass="DisplayLabel" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                        <Label Text="City" StyleClass="PickerLabel" Grid.Row="4" Grid.Column="1"/>
+                                        <Label Text="{Binding City}" StyleClass="DisplayLabel" Grid.Row="5" Grid.Column="1"/>
+                                        <Label Text="State" StyleClass="PickerLabel" Grid.Row="4" Grid.Column="2"/>
+                                        <Label Text="{Binding State}" StyleClass="DisplayLabel" Grid.Row="5" Grid.Column="2"/>
+                                        <Label Text="Zip Code" StyleClass="PickerLabel" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                        <Label Text="{Binding ZipCode}" StyleClass="DisplayLabel" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2"/>
+                                        <!-- bottom -->
+                                        <Label Text="Special Instructions" StyleClass="PickerLabel" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                        <Label Text="{Binding SpecialInstructions}" StyleClass="DisplayLabel" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                    </Grid>
+                                    <Button x:Name="btnCompleted" Text="Mark Completed" Clicked="btnCompleted_Clicked"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

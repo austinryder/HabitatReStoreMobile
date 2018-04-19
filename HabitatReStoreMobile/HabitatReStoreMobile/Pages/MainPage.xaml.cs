@@ -22,12 +22,15 @@ namespace HabitatReStoreMobile.Pages
             var pageRecentItems = new NavigationItem() { Title = "Recent Items", Icon = "icItems.png", Page = typeof(RecentItemsPage) };
             var pageDonationHome = new NavigationItem() { Title = "Donate", Icon = "icDonate.png", Page = typeof(DonationHomePage) };
             var pageVolunteerHome = new NavigationItem() { Title = "Volunteer", Icon = "icVolunteer.png", Page = typeof(VolunteerHomePage) };
+            var pageDriverHome = new NavigationItem() { Title = "Drivers", Icon = "icDriver.png", Page = typeof(DriverLoginPage) };
+
 
             menuList.Add(pageHome);
             menuList.Add(pageFindReStore);
             menuList.Add(pageRecentItems);
             menuList.Add(pageDonationHome);
             menuList.Add(pageVolunteerHome);
+            menuList.Add(pageDriverHome);
 
             navigationDrawerList.ItemsSource = menuList;
 
